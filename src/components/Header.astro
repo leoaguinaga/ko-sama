@@ -1,45 +1,280 @@
 ---
+import { site, whatsappLink } from "../data/site";
+import { nav } from "../data/nav";
+
 interface Props {
-  /** "over" = blanco sobre la foto del hero; "paper" = negro sobre marfil */
-  tone?: 'over' | 'paper';
-  current?: string;
+  tone?: "over" | "paper";
 }
-const { tone = 'paper', current } = Astro.props;
-const links = [
-  { href: '/#proyectos', label: 'Proyectos', id: 'proyectos' },
-  { href: '/#estudio', label: 'Estudio', id: 'estudio' },
-  { href: '/#proceso', label: 'Proceso', id: 'proceso' },
-  { href: '/#contacto', label: 'Contacto', id: 'contacto' },
-];
-const over = tone === 'over';
+const { tone = "paper" } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isCurrent = (href: string) =>
+  href === "/" ? path === "/" : path === href || path.startsWith(`${href}/`);
+const over = tone === "over";
 ---
 
 <header
-  class:list={[
-    'wrap flex items-start justify-between gap-6 pt-6 md:pt-8',
-    over ? 'absolute inset-x-0 top-0 z-20 text-paper' : 'relative text-ink',
-  ]}
+  class="site-header wrap sticky top-0 z-30 flex h-(--header-h) items-center justify-between gap-6"
+  data-tone={tone}
+  data-site-header
 >
-  <a href="/" aria-label="Ko-Sama, inicio" class="block shrink-0">
+  <a href="/" aria-label="Ko-Sama, inicio" class="logo block shrink-0">
+    {
+      over && (
+        <img
+          src="/brand/logo-blanco.webp"
+          alt="Ko-Sama Arquitectos del paisaje"
+          width="2000"
+          height="667"
+          class="logo-over h-auto w-37 md:w-47"
+        />
+      )
+    }
     <img
-      src={over ? '/brand/logo-blanco.webp' : '/brand/logo-negro.webp'}
-      alt="Ko-Sama Arquitectos del paisaje"
+      src="/brand/logo-negro.webp"
+      alt={over ? "" : "Ko-Sama Arquitectos del paisaje"}
       width="2000"
       height="667"
-      class="h-auto w-[148px] md:w-[188px]"
+      class="logo-ink h-auto w-37 md:w-47"
     />
   </a>
   <nav aria-label="Principal" class="text-note">
-    <ul class="hidden items-center gap-7 md:flex">
+    <ul class="hidden items-center gap-8 md:flex">
       {
-        links.map((l) => (
-          <li class="flex items-center gap-2">
-            {current === l.id && <span class="dot" aria-hidden="true" />}
-            <a href={l.href} class="link-u" aria-current={current === l.id ? 'page' : undefined}>{l.label}</a>
-          </li>
-        ))
+        nav.map((l) => {
+          const on = isCurrent(l.href);
+          return (
+            <li class="nav-item" data-on={on ? "" : undefined}>
+              <span class="dot" aria-hidden="true" />
+              <a
+                href={l.href}
+                class="nav-link"
+                aria-current={on ? "page" : undefined}
+              >
+                {l.label}
+              </a>
+            </li>
+          );
+        })
       }
     </ul>
-    <a href="/#contacto" class="link-u md:hidden">Contacto</a>
+    <button
+      type="button"
+      class="link-u -mr-2 min-h-11 cursor-pointer px-2 md:hidden"
+      aria-haspopup="dialog"
+      aria-controls="menu-movil"
+      data-menu-open
+    >
+      Menú
+    </button>
   </nav>
 </header>
+
+<dialog id="menu-movil" class="menu" aria-label="Menú" data-menu>
+  <div class="wrap flex min-h-full flex-col pt-6 pb-8">
+    <div class="flex items-start justify-between gap-6">
+      <a href="/" aria-label="Ko-Sama, inicio" class="block shrink-0">
+        <img
+          src="/brand/logo-negro.webp"
+          alt="Ko-Sama Arquitectos del paisaje"
+          width="2000"
+          height="667"
+          class="h-auto w-37"
+        />
+      </a>
+      <button
+        type="button"
+        class="link-u -mr-2 min-h-11 cursor-pointer px-2 text-note"
+        autofocus
+        data-menu-close
+      >
+        Cerrar
+      </button>
+    </div>
+
+    <ul class="mt-auto space-y-1 pt-16">
+      {
+        nav.map((l, i) => {
+          const on = isCurrent(l.href);
+          return (
+            <li class="menu-row" style={`--i:${i}`}>
+              <a
+                href={l.href}
+                class="flex items-center gap-4 py-1 text-[clamp(2.5rem,12vw,3.5rem)] leading-[1.05] font-display tracking-[-0.02em]"
+                aria-current={on ? "page" : undefined}
+              >
+                {l.label}
+                {on && <span class="dot" aria-hidden="true" />}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class="menu-row mt-12 space-y-1 text-note" style="--i:4">
+      <p><a class="link-u" href={whatsappLink()}>WhatsApp {site.phone}</a></p>
+      <p><a class="link-u" href={`mailto:${site.email}`}>{site.email}</a></p>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  /* Pegado arriba dentro de su bloque (header + main): al llegar el footer, se va con él.
+     Sobre la foto del Hero va transparente y en blanco; al salir de ella toma el marfil. */
+  .site-header {
+    color: var(--color-ink);
+    background: transparent;
+    box-shadow: 0 1px 0 transparent;
+    transition:
+      background-color 280ms var(--ease-out-soft),
+      color 280ms var(--ease-out-soft),
+      box-shadow 280ms var(--ease-out-soft);
+  }
+  .site-header[data-stuck] {
+    background: var(--color-bg);
+    box-shadow: 0 1px 0 color-mix(in srgb, var(--color-ink) 8%, transparent);
+  }
+  .site-header[data-tone="over"]:not([data-stuck]) {
+    color: var(--color-paper);
+  }
+  .logo {
+    display: grid;
+  }
+  .logo > img {
+    grid-area: 1 / 1;
+    transition: opacity 280ms var(--ease-out-soft);
+  }
+  .site-header[data-tone="over"]:not([data-stuck]) .logo-ink,
+  .site-header[data-tone="over"][data-stuck] .logo-over {
+    opacity: 0;
+  }
+
+  /* Escritorio: el punto rojo marca la página actual y asoma al pasar el cursor. */
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .nav-item .dot {
+    transform: scale(0);
+    transition: transform 280ms var(--ease-out-soft);
+  }
+  .nav-item[data-on] .dot,
+  .nav-item:hover .dot {
+    transform: scale(1);
+  }
+  .nav-item:not([data-on]):hover .dot {
+    opacity: 0.55;
+  }
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /* Móvil: hoja completa en marfil; filas que suben en cascada. */
+  .menu {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    opacity: 0;
+    transition:
+      opacity 320ms var(--ease-out-soft),
+      overlay 320ms allow-discrete,
+      display 320ms allow-discrete;
+  }
+  .menu[open] {
+    opacity: 1;
+  }
+  :global(html:has(.menu[open])) {
+    overflow: hidden;
+  }
+  .menu::backdrop {
+    background: transparent;
+  }
+  .menu-row {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 480ms var(--ease-out-soft),
+      transform 480ms var(--ease-out-soft);
+    transition-delay: calc(var(--i) * 45ms + 60ms);
+  }
+  .menu[open] .menu-row {
+    opacity: 1;
+    transform: none;
+  }
+  @starting-style {
+    .menu[open] {
+      opacity: 0;
+    }
+    .menu[open] .menu-row {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+  @media (min-width: 768px) {
+    .menu {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  function setupMenu() {
+    const menu = document.querySelector<HTMLDialogElement>("[data-menu]");
+    const open = document.querySelector<HTMLButtonElement>("[data-menu-open]");
+    if (!menu || !open) return;
+    open.setAttribute("aria-expanded", "false");
+    open.addEventListener("click", () => {
+      menu.showModal();
+      open.setAttribute("aria-expanded", "true");
+    });
+    menu.querySelector("[data-menu-close]")?.addEventListener("click", () => menu.close());
+    menu.addEventListener("close", () => {
+      open.setAttribute("aria-expanded", "false");
+      open.focus();
+    });
+    // Al pasar a escritorio con el menú abierto, se cierra solo.
+    const mq = matchMedia("(min-width: 768px)");
+    mq.addEventListener("change", (e) => e.matches && menu.open && menu.close());
+  }
+  document.addEventListener("astro:page-load", setupMenu);
+
+  // Marca el header como "pegado" para darle fondo: en la home, al dejar atrás la foto
+  // del Hero; en el resto, apenas hay scroll.
+  let stopStuck: (() => void) | undefined;
+  function setupStuck() {
+    stopStuck?.();
+    const header = document.querySelector<HTMLElement>("[data-site-header]");
+    if (!header) return;
+    const set = (on: boolean) => header.toggleAttribute("data-stuck", on);
+    const hero = document.querySelector("[data-hero-section]");
+    if (header.dataset.tone === "over" && hero) {
+      const io = new IntersectionObserver(([e]) => set(!e.isIntersecting), {
+        rootMargin: `-${header.offsetHeight}px 0px 0px 0px`,
+      });
+      io.observe(hero);
+      stopStuck = () => io.disconnect();
+    } else {
+      const onScroll = () => set(window.scrollY > 4);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+      stopStuck = () => window.removeEventListener("scroll", onScroll);
+    }
+  }
+  document.addEventListener("astro:page-load", setupStuck);
+  // El ClientRouter cambia el DOM: el modal no debe sobrevivir a la navegación.
+  document.addEventListener("astro:before-swap", () => {
+    document.querySelector<HTMLDialogElement>("[data-menu]")?.close();
+  });
+</script>

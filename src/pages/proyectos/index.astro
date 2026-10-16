@@ -11,35 +11,37 @@ const ratios = ['aspect-[4/5]', 'aspect-[3/2]', 'aspect-square', 'aspect-[3/2]',
 ---
 
 <Layout title="Proyectos · Ko-Sama" description="Jardines, patios, alamedas y espacios públicos diseñados y construidos por Ko-Sama en Lambayeque.">
-  <Header current="proyectos" />
-  <main id="contenido" class="wrap pt-24 pb-32 md:pt-36">
-    <div class="grid-12 gap-y-8" data-reveal>
-      <h1 class="col-span-12 text-display md:col-span-7">Proyectos</h1>
-      <div class="col-span-12 flex flex-wrap items-end gap-x-6 gap-y-2 md:col-span-5 md:justify-end" role="group" aria-label="Filtrar por tipo" data-filter>
-        <button type="button" class="filter is-on" data-type="">Todos</button>
-        {types.map((t) => <button type="button" class="filter" data-type={t}>{t}</button>)}
+  <div>
+    <Header />
+    <main id="contenido" class="wrap pt-24 pb-32 md:pt-36">
+      <div class="grid-12 gap-y-8" data-reveal>
+        <h1 class="col-span-12 text-display md:col-span-7">Proyectos</h1>
+        <div class="col-span-12 flex flex-wrap items-end gap-x-6 gap-y-2 md:col-span-5 md:justify-end" role="group" aria-label="Filtrar por tipo" data-filter>
+          <button type="button" class="filter is-on" data-type="">Todos</button>
+          {types.map((t) => <button type="button" class="filter" data-type={t}>{t}</button>)}
+        </div>
       </div>
-    </div>
 
-    <ul class="mt-16 columns-1 gap-[clamp(12px,1.6vw,28px)] md:columns-2 lg:columns-3" data-grid>
-      {
-        projects.map((p, i) => (
-          <li class="mb-14 break-inside-avoid" data-type={p.data.type} data-reveal>
-            <a href={`/proyectos/${p.id}`} class="group block">
-              <div class:list={['media', ratios[i % ratios.length]]}>
-                <Image src={p.data.cover} alt={p.data.coverAlt} widths={[600, 900, 1300]} sizes="(min-width: 1024px) 31vw, (min-width: 768px) 46vw, 90vw" class="h-full w-full object-cover" transition:name={`cover-${p.id}`} />
-              </div>
-              <p class="mt-4 flex items-center gap-2 text-[19px]">
-                <span class="dot scale-50 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100" aria-hidden="true" />
-                {p.data.name}
-              </p>
-              <p class="text-note text-muted">{p.data.type} · {p.data.location} · {p.data.year}</p>
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </main>
+      <ul class="mt-16 columns-1 gap-[clamp(12px,1.6vw,28px)] md:columns-2 lg:columns-3" data-grid>
+        {
+          projects.map((p, i) => (
+            <li class="mb-14 break-inside-avoid" data-type={p.data.type} data-reveal>
+              <a href={`/proyectos/${p.id}`} class="group block">
+                <div class:list={['media', ratios[i % ratios.length]]}>
+                  <Image src={p.data.cover} alt={p.data.coverAlt} widths={[600, 900, 1300]} sizes="(min-width: 1024px) 31vw, (min-width: 768px) 46vw, 90vw" class="h-full w-full object-cover" transition:name={`cover-${p.id}`} />
+                </div>
+                <p class="mt-4 flex items-center gap-2 text-[19px]">
+                  <span class="dot scale-50 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100" aria-hidden="true" />
+                  {p.data.name}
+                </p>
+                <p class="text-note text-muted">{p.data.type} · {p.data.location} · {p.data.year}</p>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </main>
+  </div>
   <Footer />
 </Layout>
 

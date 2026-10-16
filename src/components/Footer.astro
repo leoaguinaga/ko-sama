@@ -1,23 +1,41 @@
 ---
-import { Image } from 'astro:assets';
-import { site, whatsappLink } from '../data/site';
-import credits from '../data/credits.json';
-import last from '../assets/temp/zen-garden-kanyoji-in-kano-yamaguchi-pref.jpg';
+import { Image } from "astro:assets";
+import { founder, site, whatsappLink } from "../data/site";
+import { nav } from "../data/nav";
+import credits from "../data/credits.json";
+import last from "../assets/temp/zen-garden-kanyoji-in-kano-yamaguchi-pref.jpg";
 ---
 
-<footer class="relative flex h-[88svh] min-h-[560px] flex-col justify-between overflow-hidden bg-ink text-paper md:h-svh">
-  <Image src={last} alt="" widths={[800, 1400, 2000]} sizes="100vw" class="absolute inset-0 h-full w-full object-cover brightness-[0.55]" data-parallax />
+<footer
+  class="relative flex h-[88svh] min-h-[560px] flex-col justify-between overflow-hidden bg-ink text-paper md:h-svh"
+>
+  <Image
+    src={last}
+    alt=""
+    widths={[800, 1400, 2000]}
+    sizes="100vw"
+    class="absolute inset-0 h-full w-full object-cover brightness-[0.55]"
+    data-parallax
+  />
 
   <div class="wrap relative grid-12 gap-y-6 pt-8">
     <nav aria-label="Pie de página" class="col-span-6 md:col-span-3">
       <ul class="space-y-1">
-        <li><a class="link-u" href="/proyectos">Proyectos</a></li>
-        <li><a class="link-u" href="/#estudio">Estudio</a></li>
-        <li><a class="link-u" href="/#proceso">Proceso</a></li>
+        {
+          nav.map((l) => (
+            <li>
+              <a class="link-u" href={l.href}>
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
         <li><a class="link-u" href={site.instagram}>Instagram</a></li>
       </ul>
     </nav>
-    <address class="col-span-6 not-italic md:col-span-3 md:col-start-10 md:text-right">
+    <address
+      class="col-span-6 not-italic md:col-span-3 md:col-start-10 md:text-right"
+    >
       <a class="link-u" href={whatsappLink()}>{site.phone}</a><br />
       <a class="link-u" href={`mailto:${site.email}`}>{site.email}</a><br />
       {site.address}<br />
@@ -26,17 +44,25 @@ import last from '../assets/temp/zen-garden-kanyoji-in-kano-yamaguchi-pref.jpg';
   </div>
 
   <div class="wrap relative pb-8">
-    <img src="/brand/logo-blanco.webp" alt="Ko-Sama Arquitectos del paisaje" width="2000" height="667" class="-mx-[6%] w-[112%] max-w-none" loading="lazy" />
-    <div class="mt-4 flex flex-col gap-2 text-note text-paper/75 md:flex-row md:justify-between">
-      <p>© {new Date().getFullYear()} Ko-Sama Arquitectos del Paisaje · {site.city}, Perú</p>
-      <details class="md:text-right">
-        <summary class="cursor-pointer">Créditos de fotografías</summary>
-        <ul class="mt-2 max-w-[70ch] space-y-1 text-left">
-          {credits.map((c) => (
-            <li><a class="link-u" href={c.page}>«{c.title}»</a>, {c.creator}, {c.license}</li>
-          ))}
-        </ul>
-      </details>
+    <img
+      src="/brand/logo-blanco.webp"
+      alt="Ko-Sama Arquitectos del paisaje"
+      width="2000"
+      height="667"
+      class="-mx-[6%] w-[112%] max-w-none"
+      loading="lazy"
+    />
+    <div
+      class="mt-4 flex flex-col gap-2 text-note text-paper/75 md:flex-row md:justify-between"
+    >
+      <p>
+        © {new Date().getFullYear()} Ko-Sama Arquitectos del Paisaje · Arq. {
+          founder.name
+        } · {site.city}, Perú
+      </p>
+      <a class="cursor-pointer md:text-right" href="/politica-de-privacidad"
+        >Política de privacidad</a
+      >
     </div>
   </div>
 </footer>

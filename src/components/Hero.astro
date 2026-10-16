@@ -1,28 +1,36 @@
 ---
-import { getImage } from 'astro:assets';
-import Header from './Header.astro';
-import { site } from '../data/site';
-import mir from '../assets/temp/nice-miroir-d-eau.jpg';
-import hen from '../assets/temp/hendrie-park-reflecting-pools-may-2018-3.jpg';
-import oxf from '../assets/temp/arne-jacobsen-st-catherine-s-college-oxford.jpg';
-import blu from '../assets/temp/the-blue-house-4.jpg';
+import { getImage } from "astro:assets";
+import { founder, site } from "../data/site";
+import mir from "../assets/temp/nice-miroir-d-eau.jpg";
+import hen from "../assets/temp/hendrie-park-reflecting-pools-may-2018-3.jpg";
+import oxf from "../assets/temp/arne-jacobsen-st-catherine-s-college-oxford.jpg";
+import blu from "../assets/temp/the-blue-house-4.jpg";
 
 // ⚠ Fotos temporales: reemplazar por obras propias con cielo/espacio en la mitad superior.
 const sources = [
-  { src: mir, alt: 'Espejo de agua con palmeras bajo un cielo despejado' },
-  { src: hen, alt: 'Pabellón blanco reflejado en un estanque' },
-  { src: oxf, alt: 'Explanada de césped frente a un edificio bajo' },
-  { src: blu, alt: 'Patio con palmeras y un muro azul' },
+  { src: mir, alt: "Espejo de agua con palmeras bajo un cielo despejado" },
+  { src: hen, alt: "Pabellón blanco reflejado en un estanque" },
+  { src: oxf, alt: "Explanada de césped frente a un edificio bajo" },
+  { src: blu, alt: "Patio con palmeras y un muro azul" },
 ];
 const slides = await Promise.all(
   sources.map(async (s) => ({
     ...s,
-    img: await getImage({ src: s.src, widths: [800, 1280, 1920], format: 'webp', quality: 78 }),
+    img: await getImage({
+      src: s.src,
+      widths: [800, 1280, 1920],
+      format: "webp",
+      quality: 78,
+    }),
   })),
 );
 ---
 
-<section class="relative h-svh min-h-[560px] overflow-hidden bg-ink text-paper" aria-label="Presentación">
+<section
+  class="relative -mt-(--header-h) h-svh min-h-[560px] overflow-hidden bg-ink text-paper"
+  aria-label="Presentación"
+  data-hero-section
+>
   <div class="hero-slides absolute inset-0" data-hero>
     {
       slides.map((s, i) => (
@@ -30,33 +38,53 @@ const slides = await Promise.all(
           src={s.img.src}
           srcset={s.img.srcSet.attribute}
           sizes="100vw"
-          alt={i === 0 ? s.alt : ''}
-          aria-hidden={i === 0 ? undefined : 'true'}
+          alt={i === 0 ? s.alt : ""}
+          aria-hidden={i === 0 ? undefined : "true"}
           width={s.img.attributes.width}
           height={s.img.attributes.height}
-          loading={i === 0 ? 'eager' : 'lazy'}
-          fetchpriority={i === 0 ? 'high' : 'auto'}
+          loading={i === 0 ? "eager" : "lazy"}
+          fetchpriority={i === 0 ? "high" : "auto"}
           decoding="async"
-          class:list={['absolute inset-0 h-full w-full object-cover', i === 0 && 'is-on']}
+          class:list={[
+            "absolute inset-0 h-full w-full object-cover",
+            i === 0 && "is-on",
+          ]}
           data-parallax
         />
       ))
     }
   </div>
-  <!-- Velo neutro bajo el texto blanco (excepción permitida). taste-skill-ignore -->
-  <div class="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-[linear-gradient(to_top,rgba(10,10,10,0.55),rgba(10,10,10,0))]" aria-hidden="true"></div><!-- taste-skill-ignore -->
+  <!-- Velos neutros bajo el texto blanco (excepción permitida): densos solo donde hay texto,
+       para que el párrafo y la navegación pasen AA aunque la foto tenga cielo claro. taste-skill-ignore -->
+  <div
+    class="pointer-events-none absolute inset-x-0 top-0 h-[200px] bg-[linear-gradient(to_bottom,rgba(10,10,10,0.62)_0%,rgba(10,10,10,0.55)_40%,rgba(10,10,10,0)_100%)]"
+    aria-hidden="true"
+  >
+  </div><!-- taste-skill-ignore -->
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] bg-[linear-gradient(to_top,rgba(10,10,10,0.74)_0%,rgba(10,10,10,0.6)_40%,rgba(10,10,10,0)_100%)]"
+    aria-hidden="true"
+  >
+  </div><!-- taste-skill-ignore -->
 
-  <Header tone="over" />
-
-  <div class="wrap absolute inset-x-0 bottom-0 z-10 grid-12 items-end pb-8 md:pb-12" data-reveal>
-    <h1 class="col-span-12 text-display md:col-span-7">Paisajes que<br />se habitan</h1>
-    <div class="col-span-12 mt-6 flex flex-col gap-5 md:col-span-4 md:col-start-9 md:mt-0 md:items-end md:text-right">
-      <p class="max-w-[32ch] text-[15px] leading-snug text-paper/90">
-        Arquitectura del paisaje en {site.city} desde {site.founded}. Diseñamos y construimos jardines, patios y espacios públicos.
+  <div
+    class="wrap absolute inset-x-0 bottom-0 z-10 grid-12 items-end pb-8 md:pb-12"
+    data-reveal
+  >
+    <h1 class="col-span-12 text-display md:col-span-7">
+      Paisajes que<br />se habitan
+    </h1>
+    <div
+      class="col-span-12 mt-6 flex flex-col gap-5 md:col-span-4 md:col-start-9 md:mt-0 md:items-end md:text-right"
+    >
+      <p class="max-w-[32ch] text-[15px] leading-snug text-paper">
+        El estudio de arquitectura del paisaje de {founder.name}, en {site.city}
+        desde {site.founded}. Diseñamos y construimos jardines, patios y espacios
+        públicos.
       </p>
       <div class="flex flex-wrap items-center gap-5 md:justify-end">
-        <a href="#contacto" class="btn-dot">Agenda una visita</a>
-        <a href="#proyectos" class="link-u text-[15px]">Ver proyectos</a>
+        <a href="/contacto" class="btn-dot">Agenda una visita</a>
+        <a href="/proyectos" class="link-u text-[15px]">Ver proyectos</a>
       </div>
     </div>
   </div>
@@ -68,9 +96,13 @@ const slides = await Promise.all(
     transition: opacity 1600ms ease-in-out;
     will-change: opacity;
   }
-  .hero-slides img.is-on { opacity: 1; }
+  .hero-slides img.is-on {
+    opacity: 1;
+  }
   @media (prefers-reduced-motion: reduce) {
-    .hero-slides img:not(:first-child) { display: none; }
+    .hero-slides img:not(:first-child) {
+      display: none;
+    }
   }
 </style>
 
@@ -79,16 +111,16 @@ const slides = await Promise.all(
   let timer: number | undefined;
   function start() {
     clearInterval(timer);
-    const root = document.querySelector('[data-hero]');
-    if (!root || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const imgs = [...root.querySelectorAll('img')];
+    const root = document.querySelector("[data-hero]");
+    if (!root || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const imgs = [...root.querySelectorAll("img")];
     let i = 0;
     timer = window.setInterval(() => {
       if (document.hidden) return;
-      imgs[i].classList.remove('is-on');
+      imgs[i].classList.remove("is-on");
       i = (i + 1) % imgs.length;
-      imgs[i].classList.add('is-on');
+      imgs[i].classList.add("is-on");
     }, 5800);
   }
-  document.addEventListener('astro:page-load', start);
+  document.addEventListener("astro:page-load", start);
 </script>

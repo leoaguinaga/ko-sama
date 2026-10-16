@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { founder, site, whatsappLink } from '../data/site';
+
+// Sin retrato todavía: se muestra una obra suya, dicha como tal en el pie de foto.
+const work = (await getCollection('projects')).find((p) => p.data.featured)!;
+const photo = founder.portrait
+  ? { src: founder.portrait, alt: founder.portraitAlt, caption: null }
+  : { src: work.data.cover, alt: work.data.coverAlt, caption: `${work.data.name}, ${work.data.location}. Proyecto de ${founder.name}.` };
+const [lead, ...rest] = founder.bio;
+---
+
+<section class="wrap pt-20 pb-28 md:pt-32 md:pb-40" aria-labelledby="fundador-t">
+  <div class="grid-12 gap-y-6" data-reveal>
+    <h1 id="fundador-t" class="col-span-12 text-display md:col-span-8">
+      {founder.name.split(' ')[0]}<br />{founder.name.split(' ').slice(1).join(' ')}
+    </h1>
+    <p class="col-span-12 max-w-[30ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug md:col-span-4 md:self-end md:text-right">
+      {founder.title}. Fundador de {site.name}, el estudio de arquitectura del paisaje que dirige en {site.city} desde {site.founded}.
+    </p>
+  </div>
+
+  <div class="mt-14 grid-12 gap-y-12 md:mt-20">
+    <figure class="col-span-12 md:col-span-6" data-reveal>
+      <div class="media aspect-[4/5]" data-unveil>
+        <Image src={photo.src} alt={photo.alt} widths={[600, 1000, 1400]} sizes="(min-width: 768px) 48vw, 100vw" class="h-full w-full object-cover" />
+      </div>
+      {photo.caption && <figcaption class="mt-4 text-note text-muted">{photo.caption}</figcaption>}
+    </figure>
+
+    <div class="col-span-12 md:col-span-5 md:col-start-8 md:self-end md:pb-10" data-reveal>
+      <p class="text-statement leading-[1.25]">{lead}</p>
+      {rest.map((t) => <p class="mt-6 max-w-[52ch]">{t}</p>)}
+      <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <a href="/proyectos" class="link-u">Ver sus proyectos</a>
+        <a href={whatsappLink(`Hola ${founder.firstName}, quiero conversar sobre un proyecto.`)} class="link-u">
+          Escribirle por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

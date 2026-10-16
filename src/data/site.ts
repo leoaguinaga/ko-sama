@@ -4,9 +4,9 @@ export const site = {
   tagline: 'Arquitectos del paisaje',
   founded: 2014,
   city: 'Chiclayo',
-  phone: '+51 999 999 999',
-  whatsapp: '51999999999',
-  email: 'hola@kosama.pe',
+  phone: '+51 978 100 062',
+  whatsapp: '51978100062',
+  email: 'hola@ko-sama.com',
   address: 'Chiclayo, Lambayeque, Perú',
   hours: 'Lunes a sábado, 9:00 a 18:00',
   instagram: 'https://instagram.com/kosama.pe',
@@ -34,3 +34,19 @@ export const process = [
   { lead: 'Después, el proyecto.', text: 'Anteproyecto con especies, materiales y recorridos; presupuesto por partidas y planos para que sepas qué se construye y cuánto cuesta.' },
   { lead: 'Al final, la obra.', text: 'Ejecutamos con nuestro equipo, instalamos el riego y te entregamos un plan de mantenimiento para que el jardín mejore con los años.' },
 ];
+
+// ⚠ Fundador: el público lo reconoce más por su nombre que por la marca. Falta del cliente:
+//   - retrato (vertical 4:5, luz natural, idealmente en obra) → `portrait`
+//   - formación y trayectoria para un tercer párrafo de `bio`
+// Mientras no haya retrato, la página muestra una obra suya con pie de foto.
+export const founder = {
+  name: 'Jorge Guerrero',
+  firstName: 'Jorge',
+  title: 'Arquitecto',
+  portrait: null as ImageMetadata | null,
+  portraitAlt: 'Retrato de Jorge Guerrero',
+  bio: [
+    'Cuando en Chiclayo alguien recomienda a quién encargarle un jardín, casi siempre dice un nombre: el de Jorge.',
+    'Jorge Guerrero es arquitecto y fundó Ko-Sama en 2014. Desde entonces proyecta los jardines, patios y espacios públicos del estudio y acompaña cada obra hasta la entrega: el criterio de la primera visita llega hasta el último riego.',
+  ],
+};

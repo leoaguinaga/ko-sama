@@ -1,26 +1,33 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
 import Hero from '../components/Hero.astro';
 import Intro from '../components/Intro.astro';
 import Work from '../components/Work.astro';
 import Featured from '../components/Featured.astro';
-import Studio from '../components/Studio.astro';
-import Process from '../components/Process.astro';
-import Clients from '../components/Clients.astro';
-import Contact from '../components/Contact.astro';
+import Onward from '../components/Onward.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout>
-  <Hero />
-  <main>
-    <Intro />
-    <Work />
-    <Featured />
-    <Studio />
-    <Process />
-    <Clients />
-    <Contact />
-  </main>
+  <!-- Enlaces viejos de una sola página (/#estudio, /#contacto…) llevan a su página nueva. -->
+  <script is:inline>
+    (function () {
+      var to = { '#estudio': '/nosotros', '#proceso': '/nosotros', '#contacto': '/contacto' }[location.hash];
+      if (to) location.replace(to);
+    })();
+  </script>
+  <!-- El header queda pegado solo dentro de este bloque: al llegar el footer, se va con él. -->
+  <div>
+    <Header tone="over" />
+    <Hero />
+    <main>
+      <Intro />
+      <Work />
+      <Featured />
+      <div class="h-28 md:h-40" aria-hidden="true"></div>
+      <Onward />
+    </main>
+  </div>
   <Footer />
 </Layout>

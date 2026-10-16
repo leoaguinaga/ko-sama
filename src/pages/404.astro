@@ -6,14 +6,16 @@ import img from '../assets/temp/bloedel-reserve-16.jpg';
 ---
 
 <Layout title="Página no encontrada · Ko-Sama">
-  <Header />
-  <main id="contenido" class="wrap grid-12 items-end gap-y-10 py-24 md:py-32">
-    <div class="col-span-12 md:col-span-5">
-      <h1 class="text-display">Este sendero no sigue</h1>
-      <a href="/" class="btn-dot mt-10">Volver al inicio</a>
-    </div>
-    <div class="media col-span-12 aspect-[4/5] md:col-span-6 md:col-start-7">
-      <Image src={img} alt="Sendero de piedra entre árboles" widths={[600, 1100]} sizes="50vw" class="h-full w-full object-cover" />
-    </div>
-  </main>
+  <div>
+    <Header />
+    <main id="contenido" class="wrap grid-12 items-end gap-y-10 py-24 md:py-32">
+      <div class="col-span-12 md:col-span-5">
+        <h1 class="text-display">Este sendero no sigue</h1>
+        <a href="/" class="btn-dot mt-10">Volver al inicio</a>
+      </div>
+      <div class="media col-span-12 aspect-[4/5] md:col-span-6 md:col-start-7">
+        <Image src={img} alt="Sendero de piedra entre árboles" widths={[600, 1100]} sizes="50vw" class="h-full w-full object-cover" />
+      </div>
+    </main>
+  </div>
 </Layout>

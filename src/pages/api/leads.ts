@@ -31,9 +31,31 @@ export const POST: APIRoute = async ({ request }) => {
     return new Response(null, { status: 204 });
   }
 
-  const rows = ['name', 'phone', 'email', 'projectType', 'city', 'areaM2', 'message']
-    .map((k) => `<tr><td><b>${k}</b></td><td>${esc(body[k])}</td></tr>`)
+  const fields: [string, string][] = [
+    ['name', 'Nombre'],
+    ['phone', 'Teléfono'],
+    ['email', 'Correo'],
+    ['contactPref', 'Prefiere'],
+    ['service', 'Servicio'],
+    ['space', 'Lugar'],
+    ['projectType', 'Tipo (CRM)'],
+    ['areaRange', 'Área'],
+    ['areaM2', 'Área exacta (m²)'],
+    ['siteState', 'Estado del lugar'],
+    ['timeline', 'Inicio'],
+    ['budget', 'Presupuesto'],
+    ['city', 'Ubicación'],
+    ['message', 'Mensaje'],
+  ];
+  const rows = fields
+    .filter(([k]) => body[k] !== undefined && body[k] !== '')
+    .map(([k, label]) => `<tr><td><b>${label}</b></td><td>${esc(body[k])}</td></tr>`)
     .join('');
+  // Asunto pensado para triar desde la bandeja: servicio, tamaño y presupuesto de un vistazo.
+  const subject = ['Nuevo lead', name, body.service, body.areaRange, body.budget]
+    .filter(Boolean)
+    .map(String)
+    .join(' · ');
 
   const res = await fetch('https://api.resend.com/emails', {
     method: 'POST',
@@ -42,7 +64,7 @@ export const POST: APIRoute = async ({ request }) => {
       from: import.meta.env.LEADS_FROM ?? 'Ko-Sama Web <web@kosama.pe>',
       to: to.split(','),
       reply_to: body.email || undefined,
-      subject: `Nuevo lead: ${name} (${body.projectType ?? 'sin tipo'})`,
+      subject,
       html: `<table>${rows}</table><pre>${esc(JSON.stringify(body.utm))}</pre>`,
     }),
   });

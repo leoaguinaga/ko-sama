@@ -1,0 +1,44 @@
+---
+// Cierre de página: lleva a la siguiente parada del recorrido (Nosotros y/o Contacto).
+import { Image } from 'astro:assets';
+import { founder, site, whatsappLink } from '../data/site';
+import studio from '../assets/temp/stenocereus-creeping-devils-at-huntington-library.jpg';
+
+interface Props {
+  to?: ('nosotros' | 'contacto')[];
+  statement?: string;
+}
+const { to = ['nosotros', 'contacto'], statement = 'Cuéntanos de tu terreno, tu casa o tu empresa. Te respondemos con una visita.' } = Astro.props;
+const both = to.includes('nosotros') && to.includes('contacto');
+---
+
+<section class="wrap grid-12 gap-y-20 pt-8 pb-32 md:pb-48" aria-label="Siguiente paso">
+  {
+    to.includes('nosotros') && (
+      <a href="/nosotros" class="group col-span-12 block md:col-span-6" data-reveal>
+        <div class="media aspect-[4/3]" data-unveil>
+          <Image src={studio} alt="Cactus rastreros sobre grava en un jardín seco" widths={[640, 1000, 1400]} sizes="(min-width: 768px) 48vw, 100vw" class="h-full w-full object-cover" />
+        </div>
+        <p class="mt-6 flex items-center gap-3 text-title">
+          {founder.name}
+          <span class="dot scale-50 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100" aria-hidden="true" />
+        </p>
+        <p class="mt-2 max-w-[40ch] text-muted">
+          {founder.title} y fundador de {site.name}. Su estudio, cómo trabajamos y quiénes ya confiaron en nosotros.
+        </p>
+      </a>
+    )
+  }
+
+  {
+    to.includes('contacto') && (
+      <div class:list={['col-span-12 flex flex-col', both ? 'md:col-span-5 md:col-start-8 md:justify-end' : 'md:col-span-6 md:col-start-7']} data-reveal>
+        <p class="max-w-[22ch] text-statement leading-[1.2]">{statement}</p>
+        <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
+          <a href="/contacto" class="btn-dot">Agenda una visita</a>
+          <a href={whatsappLink()} class="link-u">WhatsApp {site.phone}</a>
+        </div>
+      </div>
+    )
+  }
+</section>

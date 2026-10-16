@@ -24,8 +24,14 @@ const baProps = ba && { before: await toProps(ba.before), after: await toProps(b
       <p class="mt-4 text-note">{p.data.location} · {p.data.year} · {p.data.areaM2} m² · {p.data.scope}</p>
     </div>
 
-    <div class="col-span-12 -mr-[5vw] md:col-span-9">
-      <ul class="frame-run flex snap-x snap-mandatory items-end gap-[6px] overflow-x-auto pb-2" data-reveal>
+    <div class="col-span-12 -mr-[5vw] md:col-span-9" data-frames>
+      <!-- Región desplazable: enfocable con Tab, se recorre con las flechas del teclado -->
+      <ul
+        class="frame-run flex snap-x snap-mandatory items-end gap-[6px] overflow-x-auto pb-2 focus-visible:outline-offset-[-3px]"
+        tabindex="0"
+        aria-label={`Fotos de ${p.data.name}`}
+        data-reveal
+      >
         {
           frames.map((f, i) => (
             <li class:list={['shrink-0 snap-start', i === lifted ? 'order-first md:order-none' : '']}>
@@ -37,6 +43,10 @@ const baProps = ba && { before: await toProps(ba.before), after: await toProps(b
           ))
         }
       </ul>
+      <div class="frame-nav mt-4 flex gap-6 pr-[5vw] text-note" hidden>
+        <button type="button" class="link-u min-h-11 cursor-pointer disabled:cursor-default disabled:no-underline disabled:text-muted" data-dir="-1" aria-label="Fotos anteriores">Anterior</button>
+        <button type="button" class="link-u min-h-11 cursor-pointer disabled:cursor-default disabled:no-underline disabled:text-muted" data-dir="1" aria-label="Fotos siguientes">Siguiente</button>
+      </div>
     </div>
 
     {
@@ -60,3 +70,31 @@ const baProps = ba && { before: await toProps(ba.before), after: await toProps(b
   .frame-run { scrollbar-width: none; }
   .frame-run::-webkit-scrollbar { display: none; }
 </style>
+
+<script>
+  // Controles para quien no tiene desplazamiento horizontal (ratón sin trackpad, teclado).
+  function setupFrames() {
+    document.querySelectorAll<HTMLElement>('[data-frames]').forEach((root) => {
+      const run = root.querySelector<HTMLElement>('.frame-run');
+      const nav = root.querySelector<HTMLElement>('.frame-nav');
+      if (!run || !nav) return;
+      const [prev, next] = [...nav.querySelectorAll<HTMLButtonElement>('button')];
+      const sync = () => {
+        const max = run.scrollWidth - run.clientWidth;
+        nav.hidden = max < 4;
+        prev.disabled = run.scrollLeft < 4;
+        next.disabled = run.scrollLeft > max - 4;
+      };
+      nav.addEventListener('click', (e) => {
+        const btn = (e.target as Element).closest<HTMLButtonElement>('button[data-dir]');
+        if (!btn) return;
+        const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+        run.scrollBy({ left: Number(btn.dataset.dir) * run.clientWidth * 0.8, behavior: smooth ? 'smooth' : 'auto' });
+      });
+      run.addEventListener('scroll', sync, { passive: true });
+      // Observa el propio nodo (no window): no se acumulan oyentes entre navegaciones del ClientRouter.
+      new ResizeObserver(sync).observe(run);
+    });
+  }
+  document.addEventListener('astro:page-load', setupFrames);
+</script>

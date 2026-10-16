@@ -1,47 +1,97 @@
 ---
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import { stats, site } from '../data/site';
-import team from '../assets/temp/bloedel-reserve-16.jpg';
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import { stats, site, founder } from "../data/site";
+import team from "../assets/temp/bloedel-reserve-16.jpg";
 
-const projects = await getCollection('projects');
+const projects = await getCollection("projects");
 
 // Silueta esquemática de la región Lambayeque (lng, lat) proyectada a un lienzo de 320×360.
 const outline: [number, number][] = [
-  [-80.05, -5.48], [-79.75, -5.55], [-79.45, -5.72], [-79.3, -5.95], [-79.15, -6.1], [-79.2, -6.35],
-  [-79.3, -6.55], [-79.42, -6.7], [-79.45, -6.9], [-79.55, -7.1], [-79.7, -7.17], [-79.9, -6.95],
-  [-79.98, -6.8], [-80.15, -6.6], [-80.45, -6.38], [-80.62, -6.25], [-80.55, -6.05], [-80.35, -5.9], [-80.2, -5.7],
+  [-80.05, -5.48],
+  [-79.75, -5.55],
+  [-79.45, -5.72],
+  [-79.3, -5.95],
+  [-79.15, -6.1],
+  [-79.2, -6.35],
+  [-79.3, -6.55],
+  [-79.42, -6.7],
+  [-79.45, -6.9],
+  [-79.55, -7.1],
+  [-79.7, -7.17],
+  [-79.9, -6.95],
+  [-79.98, -6.8],
+  [-80.15, -6.6],
+  [-80.45, -6.38],
+  [-80.62, -6.25],
+  [-80.55, -6.05],
+  [-80.35, -5.9],
+  [-80.2, -5.7],
 ];
 const k = 200;
-const px = ([lng, lat]: [number, number]) => [(lng + 80.7) * k, (-5.4 - lat) * k] as const;
-const d = 'M' + outline.map((c) => px(c).map((n) => n.toFixed(1)).join(' ')).join(' L') + ' Z';
+const px = ([lng, lat]: [number, number]) =>
+  [(lng + 80.7) * k, (-5.4 - lat) * k] as const;
+const d =
+  "M" +
+  outline
+    .map((c) =>
+      px(c)
+        .map((n) => n.toFixed(1))
+        .join(" "),
+    )
+    .join(" L") +
+  " Z";
 const [cx, cy] = px([-79.84, -6.77]);
 ---
 
-<section id="estudio" class="wrap py-32 md:py-48" aria-labelledby="estudio-t">
+<section id="estudio" class="wrap pb-32 md:pb-48" aria-labelledby="estudio-t">
   <div class="grid-12" data-reveal>
-    <h2 id="estudio-t" class="col-span-12 text-title md:text-[clamp(2.5rem,4vw,3.75rem)]">El estudio</h2>
-    <p class="col-span-12 mt-6 max-w-[42ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug md:col-span-6">
-      Somos arquitectos del paisaje de {site.city}. Proyectamos, construimos y mantenemos: el mismo equipo de la
-      primera visita está en la obra.
+    <h2
+      id="estudio-t"
+      class="col-span-12 text-title md:text-[clamp(2.5rem,4vw,3.75rem)]"
+    >
+      Nuestro estudio
+    </h2>
+    <p
+      class="col-span-12 mt-6 max-w-[42ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug md:col-span-6"
+    >
+      {site.name} es el equipo que {founder.firstName} formó para hacer el trabajo
+      completo: proyectar, construir y mantener. El mismo equipo de la primera visita
+      está en la obra.
     </p>
   </div>
 
   <div class="mt-16 grid-12 gap-y-4 md:mt-20">
     <div class="relative col-span-12 md:col-span-8" data-reveal>
       <div class="media aspect-[4/3] md:aspect-[16/10]" data-unveil>
-        <Image src={team} alt="Sendero de piedra entre árboles y macizos de flores" widths={[800, 1280, 1800]} sizes="(min-width: 768px) 64vw, 100vw" class="h-full w-full object-cover" />
+        <Image
+          src={team}
+          alt="Sendero de piedra entre árboles y macizos de flores"
+          widths={[800, 1280, 1800]}
+          sizes="(min-width: 768px) 64vw, 100vw"
+          class="h-full w-full object-cover"
+        />
       </div>
-      <p class="mt-5 bg-bg md:absolute md:top-0 md:right-0 md:mt-0 md:w-[320px] md:p-5">
-        Trabajamos con especies que conocemos de vivero y de obra, y con riego que se puede mantener. Preferimos un
-        jardín que funcione diez años a uno que luzca una semana.
+      <p
+        class="mt-5 bg-bg md:absolute md:top-0 md:right-0 md:mt-0 md:w-[320px] md:p-5"
+      >
+        Trabajamos con especies que conocemos de vivero y de obra, y con riego
+        que se puede mantener. Preferimos un jardín que funcione diez años a uno
+        que luzca una semana.
       </p>
     </div>
 
     <div class="col-span-12 md:col-span-4" data-reveal>
-      <figure class="relative aspect-[3/2] bg-surface md:aspect-auto md:h-[min(60%,420px)]">
-        <svg viewBox="0 0 340 380" class="absolute inset-0 m-auto h-[88%] w-[88%]" role="img" aria-label={`Mapa de Lambayeque con ${projects.length} obras marcadas`}>
-          <path d={d} fill="#F7F6F3" />
+      <figure
+        class="relative aspect-[3/2] bg-surface md:aspect-auto md:h-[min(60%,420px)]"
+      >
+        <svg
+          viewBox="0 0 340 380"
+          class="absolute inset-0 m-auto h-[88%] w-[88%]"
+          role="img"
+          aria-label={`Mapa de Lambayeque con ${projects.length} obras marcadas`}
+        >
+          <path d={d} fill="#F7F6F3"></path>
           {
             projects.map((p) => {
               const [x, y] = px(p.data.coords);
@@ -52,7 +102,13 @@ const [cx, cy] = px([-79.84, -6.77]);
               );
             })
           }
-          <text x={cx + 12} y={cy - 14} font-size="14" fill="#0A0A0A" font-family="Newsreader Variable, serif">Chiclayo</text>
+          <text
+            x={cx + 12}
+            y={cy - 14}
+            font-size="14"
+            fill="#0A0A0A"
+            font-family="Newsreader Variable, serif">Chiclayo</text
+          >
         </svg>
       </figure>
       <dl class="mt-6 grid grid-cols-2 gap-x-6 gap-y-5">
@@ -70,6 +126,11 @@ const [cx, cy] = px([-79.84, -6.77]);
 </section>
 
 <style>
-  .map-pin { transition: r 200ms; }
-  a:hover .map-pin, a:focus-visible .map-pin { r: 9; }
+  .map-pin {
+    transition: r 200ms;
+  }
+  a:hover .map-pin,
+  a:focus-visible .map-pin {
+    r: 9;
+  }
 </style>

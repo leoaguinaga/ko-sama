@@ -1,7 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import '../styles/global.css';
-import { site } from '../data/site';
+import { founder, site } from '../data/site';
 
 interface Props {
   title?: string;
@@ -10,8 +10,8 @@ interface Props {
 }
 
 const {
-  title = 'Ko-Sama · Arquitectos del paisaje en Chiclayo',
-  description = 'Diseño y construcción de jardines, áreas verdes y espacios exteriores en Chiclayo y el norte del Perú. Más de 10 años de obra.',
+  title = 'Ko-Sama · Jorge Guerrero, arquitecto del paisaje en Chiclayo',
+  description = 'El estudio del arquitecto Jorge Guerrero: diseño y construcción de jardines, áreas verdes y espacios exteriores en Chiclayo y el norte del Perú desde 2014.',
   image = '/brand/og.jpg',
 } = Astro.props;
 
@@ -27,6 +27,7 @@ const jsonLd = {
   foundingDate: String(site.founded),
   address: { '@type': 'PostalAddress', addressLocality: 'Chiclayo', addressRegion: 'Lambayeque', addressCountry: 'PE' },
   areaServed: 'Lambayeque, Perú',
+  founder: { '@type': 'Person', name: founder.name, jobTitle: founder.title },
   image: new URL(image, Astro.site).toString(),
 };
 ---

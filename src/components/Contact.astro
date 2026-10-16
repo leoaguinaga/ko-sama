@@ -1,21 +1,31 @@
 ---
 import ContactForm from './ContactForm.tsx';
 import { site, whatsappLink } from '../data/site';
+
+interface Props {
+  page?: boolean;
+}
+const { page = false } = Astro.props;
 ---
 
-<section id="contacto" class="wrap grid-12 gap-y-14 pt-32 pb-28 md:pt-40 md:pb-36" aria-labelledby="contacto-t">
+<section id="contacto" class:list={['wrap grid-12 gap-y-14 pb-28 md:pb-36', page ? 'pt-24 md:pt-36' : 'pt-32 md:pt-40']} aria-labelledby="contacto-t">
   <div class="col-span-12 md:col-span-5" data-reveal>
-    <h2 id="contacto-t" class="sr-only">Contacto</h2>
-    <p class="max-w-[22ch] text-statement leading-[1.2]">
+    {page ? <h1 id="contacto-t" class="text-display">Contacto</h1> : <h2 id="contacto-t" class="sr-only">Contacto</h2>}
+    <p class:list={['max-w-[22ch] text-statement leading-[1.2]', page && 'mt-10 md:mt-14']}>
       Cuéntanos de tu terreno, tu casa o tu empresa. Te respondemos con una visita.
+    </p>
+    <p class="mt-6 max-w-[40ch] text-muted">
+      Seis preguntas rápidas y tus datos. Con eso llegamos a la primera visita con una idea de tu proyecto, no con
+      una hoja en blanco.
     </p>
     <div class="mt-12 space-y-2">
       <p><a class="link-u" href={whatsappLink()}>WhatsApp {site.phone}</a></p>
       <p><a class="link-u" href={`mailto:${site.email}`}>{site.email}</a></p>
-      <p class="pt-3 text-note text-muted">{site.address} · Respondemos en menos de 24 horas hábiles.</p>
+      <p class="pt-3 text-note text-muted">{site.address} · {site.hours}</p>
+      <p class="text-note text-muted">Respondemos en menos de 24 horas hábiles.</p>
     </div>
   </div>
   <div class="col-span-12 md:col-span-6 md:col-start-7" data-reveal>
-    <ContactForm client:visible endpoint={site.leadsEndpoint} whatsappHref={whatsappLink()} />
+    <ContactForm client:load endpoint={site.leadsEndpoint} whatsappHref={whatsappLink()} />
   </div>
 </section>
