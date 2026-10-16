@@ -1,23 +1,116 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
+import { site } from '../data/site';
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = 'Ko-Sama · Arquitectos del paisaje en Chiclayo',
+  description = 'Diseño y construcción de jardines, áreas verdes y espacios exteriores en Chiclayo y el norte del Perú. Más de 10 años de obra.',
+  image = '/brand/og.jpg',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LandscapeArchitect',
+  name: site.name,
+  description,
+  url: Astro.site?.toString(),
+  telephone: site.phone,
+  email: site.email,
+  foundingDate: String(site.founded),
+  address: { '@type': 'PostalAddress', addressLocality: 'Chiclayo', addressRegion: 'Lambayeque', addressCountry: 'PE' },
+  areaServed: 'Lambayeque, Perú',
+  image: new URL(image, Astro.site).toString(),
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/brand/favicon.png" />
+    <meta name="theme-color" content="#F7F6F3" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(image, Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+    <ClientRouter />
+  </head>
+  <body>
+    <a href="#contenido" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:bg-paper focus:px-4 focus:py-2">Saltar al contenido</a>
+    <slot />
+    <script>
+      function setupReveal() {
+        const els = document.querySelectorAll('[data-reveal]:not(.in)');
+        // Un elemento recortado al 100% nunca intersecta: se observa su contenedor.
+        const unveils = [...document.querySelectorAll<HTMLElement>('[data-unveil]:not(.in)')];
+        if (!('IntersectionObserver' in window)) {
+          els.forEach((el) => el.classList.add('in'));
+          unveils.forEach((el) => el.classList.add('in'));
+          return;
+        }
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('in');
+                e.target.querySelectorAll('[data-unveil]').forEach((u) => u.classList.add('in'));
+                if ((e.target as HTMLElement).dataset.unveilHost !== undefined) e.target.firstElementChild?.classList.add('in');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -12% 0px', threshold: 0.05 },
+        );
+        els.forEach((el) => io.observe(el));
+        unveils.filter((u) => !u.closest('[data-reveal]')).forEach((u) => {
+          const host = u.parentElement!;
+          host.dataset.unveilHost = '';
+          io.observe(host);
+        });
+      }
+
+      function setupParallax() {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const items = [...document.querySelectorAll<HTMLElement>('[data-parallax]')];
+        if (!items.length) return;
+        let ticking = false;
+        const update = () => {
+          const vh = innerHeight;
+          for (const el of items) {
+            const r = el.parentElement!.getBoundingClientRect();
+            if (r.bottom < 0 || r.top > vh) continue;
+            const progress = (r.top + r.height / 2 - vh / 2) / vh;
+            el.style.transform = `translate3d(0, ${(progress * -8).toFixed(2)}%, 0) scale(1.12)`;
+          }
+          ticking = false;
+        };
+        addEventListener('scroll', () => {
+          if (!ticking) { ticking = true; requestAnimationFrame(update); }
+        }, { passive: true });
+        update();
+      }
+
+      document.addEventListener('astro:page-load', () => {
+        setupReveal();
+        setupParallax();
+      });
+    </script>
+  </body>
+</html>

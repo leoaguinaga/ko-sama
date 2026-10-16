@@ -1,0 +1,17 @@
+---
+import { clients } from '../data/site';
+---
+
+<section class="wrap grid-12 gap-y-10 py-28 md:py-32" aria-labelledby="clientes-t">
+  <h2 id="clientes-t" class="col-span-12 text-title md:col-span-3" data-reveal>Han confiado en nosotros</h2>
+  <div class="col-span-12 grid grid-cols-2 gap-x-5 gap-y-8 text-[17px] leading-[1.5] md:col-span-8 md:col-start-5 md:grid-cols-3 md:gap-x-8 md:text-[21px]" data-reveal>
+    {
+      clients.map((g) => (
+        <ul>
+          <li class="text-muted">{g.group}</li>
+          {g.names.map((n) => <li>{n}</li>)}
+        </ul>
+      ))
+    }
+  </div>
+</section>

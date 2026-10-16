@@ -1,0 +1,34 @@
+{
+  "name": "Campus del Norte",
+  "type": "Espacio público",
+  "location": "Chiclayo",
+  "year": 2019,
+  "areaM2": 5200,
+  "scope": "Diseño y ejecución",
+  "coords": [
+    -79.86,
+    -6.758
+  ],
+  "cover": "../../assets/temp/arne-jacobsen-st-catherine-s-college-oxford.jpg",
+  "coverAlt": "Césped amplio frente a un edificio bajo de ladrillo",
+  "summary": "Explanadas de césped y senderos de sombra entre los pabellones.",
+  "body": [
+    "Ordenamos los recorridos entre pabellones con senderos de sombra y dejamos las explanadas libres para el uso diario.",
+    "Riego por aspersión zonificado según la orientación de cada explanada."
+  ],
+  "gallery": [
+    {
+      "src": "../../assets/temp/arne-jacobsen-st-catherine-s-college-oxford.jpg",
+      "alt": "Césped frente al pabellón"
+    },
+    {
+      "src": "../../assets/temp/bloedel-reserve-16.jpg",
+      "alt": "Sendero de piedra"
+    },
+    {
+      "src": "../../assets/temp/xeriscape-garden-2016-07-12-854.jpg",
+      "alt": "Muro de agua"
+    }
+  ],
+  "order": 6
+}

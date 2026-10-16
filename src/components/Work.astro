@@ -1,0 +1,67 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+
+const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const projects = all.slice(0, 6);
+
+// Tres posiciones que se repiten (docs/01 §5): izquierda 3:2 · derecha 4:5 · centro 16:9
+const placements = [
+  { col: 'md:col-span-6 md:col-start-1', ratio: 'aspect-[3/2]', sizes: '(min-width: 768px) 48vw, 100vw', mobile: 'w-full' },
+  { col: 'md:col-span-4 md:col-start-9 md:-mt-20', ratio: 'aspect-[4/5]', sizes: '(min-width: 768px) 32vw, 68vw', mobile: 'ml-auto w-[68%] md:ml-0 md:w-full' },
+  { col: 'md:col-span-7 md:col-start-3', ratio: 'aspect-[16/9]', sizes: '(min-width: 768px) 56vw, 82vw', mobile: 'w-[82%] md:w-full' },
+];
+---
+
+<section id="proyectos" class="wrap pb-32 md:pb-48">
+  <div class="grid-12" data-reveal>
+    <h2 class="col-span-12 text-title">Proyectos</h2>
+  </div>
+
+  <div class="mt-16 grid-12 gap-y-20 md:mt-24 md:gap-y-[16vh]">
+    {
+      projects.map((p, i) => {
+        const pl = placements[i % 3];
+        return (
+          <>
+            <article class:list={['col-span-12', pl.col]} data-reveal>
+              <a href={`/proyectos/${p.id}`} class:list={['group block', pl.mobile]}>
+                <p class="mb-3 flex items-center gap-2 text-note text-muted">
+                  <span class="dot scale-50 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100" aria-hidden="true" />
+                  {p.data.name}
+                </p>
+                <div class:list={['media', pl.ratio]} data-unveil>
+                  <Image
+                    src={p.data.cover}
+                    alt={p.data.coverAlt}
+                    widths={[640, 960, 1440]}
+                    sizes={pl.sizes}
+                    class="h-full w-full object-cover"
+                    transition:name={`cover-${p.id}`}
+                  />
+                </div>
+                <p class="mt-4 max-w-[48ch] text-body">
+                  {p.data.summary}{' '}
+                  <span class="text-muted">
+                    {p.data.location} · {p.data.year} · {p.data.areaM2.toLocaleString('es-PE')} m²
+                  </span>
+                </p>
+              </a>
+            </article>
+            {i === 1 && (
+              <p class="col-span-12 text-[20px] leading-snug md:col-span-4 md:col-start-2 md:-mt-[14vh] md:self-start" data-reveal>
+                <span>Cada obra parte del mismo lugar: el terreno, el agua y quién lo va a usar.</span>
+              </p>
+            )}
+          </>
+        );
+      })
+    }
+  </div>
+
+  <div class="mt-24 grid-12" data-reveal>
+    <a href="/proyectos" class="link-u col-span-12 text-statement md:col-span-6 md:col-start-7">
+      Ver los {all.length} proyectos →
+    </a>
+  </div>
+</section>

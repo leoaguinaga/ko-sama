@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets';
+import { process } from '../data/site';
+import a from '../assets/temp/rock-garden-6172688208.jpg';
+import b from '../assets/temp/golden-barrels-senecio-mandraliscae-blue-stick-succulents.jpg';
+import c from '../assets/temp/xeriscape-garden-2016-07-12-854.jpg';
+
+const stages = [
+  { ...process[0], img: a, alt: 'Terreno de grava con un árbol recién plantado', ratio: 'aspect-[3/4]', photo: 'md:col-span-4 md:col-start-1', textCol: 'md:col-span-4 md:col-start-6 md:mt-36', top: '' },
+  { ...process[1], img: b, alt: 'Detalle de cactus de barril y suculentas azules', ratio: 'aspect-square', photo: 'md:col-span-3 md:col-start-6', textCol: 'md:col-span-3 md:col-start-10', top: 'md:mt-[-8rem]' },
+  { ...process[2], img: c, alt: 'Muro de agua con una escultura entre árboles', ratio: 'aspect-[16/10]', photo: 'md:col-span-5 md:col-start-8 md:order-2', textCol: 'md:col-span-4 md:col-start-3 md:order-1', top: 'md:mt-[-2rem]' },
+];
+---
+
+<section id="proceso" class="wrap pb-32 md:pb-48" aria-labelledby="proceso-t">
+  <div class="grid-12">
+    <h2 id="proceso-t" class="col-span-12 text-title md:col-span-6 md:col-start-7 md:text-[clamp(2.25rem,4vw,4rem)]" data-reveal>Cómo trabajamos</h2>
+  </div>
+  <ol class="mt-14 space-y-16 md:mt-[-3rem] md:space-y-0">
+    {
+      stages.map((s, i) => (
+        <li class:list={['grid-12 items-start gap-y-5', s.top, i > 0 && 'md:pt-[180px]']} data-reveal>
+          <div class:list={['media col-span-12', s.ratio, s.photo, i === 1 ? 'ml-auto w-[62%] md:ml-0 md:w-auto' : i === 2 ? 'w-[78%] md:w-auto' : '']}>
+            <Image src={s.img} alt={s.alt} widths={[600, 1000, 1400]} sizes="(min-width: 768px) 36vw, 80vw" class="h-full w-full object-cover" />
+          </div>
+          <p class:list={['col-span-12 max-w-[36ch]', s.textCol]}>
+            <strong class="font-semibold">{s.lead}</strong> {s.text}
+          </p>
+        </li>
+      ))
+    }
+  </ol>
+</section>

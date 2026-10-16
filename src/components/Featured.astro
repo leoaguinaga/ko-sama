@@ -1,0 +1,62 @@
+---
+import { Image, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BeforeAfter from './BeforeAfter.tsx';
+
+const p = (await getCollection('projects')).find((x) => x.data.featured)!;
+const frames = p.data.gallery.slice(0, 6);
+const lifted = 1; // el fotograma «levantado»
+
+const ba = p.data.beforeAfter;
+const toProps = async (src: ImageMetadata) => {
+  const img = await getImage({ src, widths: [800, 1280, 1920], format: 'webp' });
+  return { src: img.src, srcSet: img.srcSet.attribute, width: Number(img.attributes.width ?? src.width), height: Number(img.attributes.height ?? src.height) };
+};
+const baProps = ba && { before: await toProps(ba.before), after: await toProps(ba.after), alt: ba.alt, demo: ba.demo };
+---
+
+<section class="overflow-x-clip bg-surface py-28 md:py-40" aria-labelledby="destacado">
+  <div class="wrap grid-12 gap-y-10">
+    <div class="col-span-12 flex flex-col md:col-span-3" data-reveal>
+      <h2 id="destacado" class="text-title">{p.data.name}</h2>
+      <a href={`/proyectos/${p.id}`} class="link-u mt-4 self-start">Ver el proyecto</a>
+      <p class="mt-10 max-w-[30ch] md:mt-auto">{p.data.summary}</p>
+      <p class="mt-4 text-note">{p.data.location} · {p.data.year} · {p.data.areaM2} m² · {p.data.scope}</p>
+    </div>
+
+    <div class="col-span-12 -mr-[5vw] md:col-span-9">
+      <ul class="frame-run flex snap-x snap-mandatory items-end gap-[6px] overflow-x-auto pb-2" data-reveal>
+        {
+          frames.map((f, i) => (
+            <li class:list={['shrink-0 snap-start', i === lifted ? 'order-first md:order-none' : '']}>
+              <div class:list={['media relative', i === lifted ? 'aspect-[3/4] h-[56vw] md:h-[62vh]' : 'aspect-[4/3] h-[34vw] md:h-[28vh]']}>
+                <Image src={f.src} alt={f.alt} widths={[480, 900, 1400]} sizes={i === lifted ? '50vw' : '25vw'} class="h-full w-full object-cover" />
+                {i === lifted && <span class="dot absolute top-4 left-4" aria-hidden="true" />}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    {
+      baProps && (
+        <div class="col-span-12 mt-16 md:col-span-10 md:col-start-3 md:mt-28" data-reveal>
+          <p class="mb-6 max-w-[40ch] text-statement leading-[1.2]">Arrastra el punto: el mismo patio, antes y después.</p>
+          <BeforeAfter client:visible {...baProps} />
+          <noscript>
+            <div class="grid grid-cols-2 gap-2">
+              <img src={baProps.before.src} alt={`${ba!.alt}: antes`} />
+              <img src={baProps.after.src} alt={`${ba!.alt}: después`} />
+            </div>
+          </noscript>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .frame-run { scrollbar-width: none; }
+  .frame-run::-webkit-scrollbar { display: none; }
+</style>

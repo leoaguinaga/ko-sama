@@ -1,0 +1,53 @@
+{
+  "name": "Casa Los Algarrobos",
+  "type": "Residencial",
+  "location": "Pimentel, Chiclayo",
+  "year": 2024,
+  "areaM2": 850,
+  "scope": "Diseño y ejecución",
+  "featured": true,
+  "coords": [
+    -79.934,
+    -6.836
+  ],
+  "cover": "../../assets/temp/the-blue-house-4.jpg",
+  "coverAlt": "Patio con palmeras, cactus y un muro azul al fondo",
+  "summary": "Un patio seco que da sombra todo el año y se riega una vez por semana.",
+  "body": [
+    "La familia quería un jardín que no dependiera del riego diario. Reemplazamos el césped por un patio de grava y especies nativas de costa, con palmeras que dan sombra a la terraza desde las tres de la tarde.",
+    "El muro de fondo se pintó para que el verde lea más intenso en la luz dura del norte. El consumo de agua bajó a la cuarta parte."
+  ],
+  "gallery": [
+    {
+      "src": "../../assets/temp/the-blue-house-4.jpg",
+      "alt": "Patio con palmeras y muro azul"
+    },
+    {
+      "src": "../../assets/temp/cleistocactus-strausii-woolly-torch-huntington-desert-garden.jpg",
+      "alt": "Detalle de cactus columnares"
+    },
+    {
+      "src": "../../assets/temp/golden-barrels-senecio-mandraliscae-blue-stick-succulents.jpg",
+      "alt": "Cactus de barril con suculentas azules"
+    },
+    {
+      "src": "../../assets/temp/stenocereus-creeping-devils-at-huntington-library.jpg",
+      "alt": "Cactus rastreros sobre grava"
+    },
+    {
+      "src": "../../assets/temp/xeriscape-garden-2014-2.jpg",
+      "alt": "Jardín seco con flores amarillas"
+    },
+    {
+      "src": "../../assets/temp/rock-garden-6172688208.jpg",
+      "alt": "Patio de grava con árbol joven"
+    }
+  ],
+  "beforeAfter": {
+    "before": "../../assets/temp/xeriscape-garden-2014-2.jpg",
+    "after": "../../assets/temp/xeriscape-garden-2014-2.jpg",
+    "alt": "El mismo patio antes y después de la obra",
+    "demo": true
+  },
+  "order": 1
+}

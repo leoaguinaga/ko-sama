@@ -1,0 +1,34 @@
+{
+  "name": "Club Las Dunas",
+  "type": "Hospedaje",
+  "location": "Reque, Chiclayo",
+  "year": 2023,
+  "areaM2": 3100,
+  "scope": "Diseño y ejecución",
+  "coords": [
+    -79.818,
+    -6.866
+  ],
+  "cover": "../../assets/temp/hendrie-park-reflecting-pools-may-2018-3.jpg",
+  "coverAlt": "Pabellón blanco reflejado en un estanque",
+  "summary": "Estanques que ordenan la llegada y separan el restaurante de las piscinas.",
+  "body": [
+    "Dos estanques rectangulares reciben al visitante y reflejan el pabellón principal.",
+    "Las especies se eligieron por su resistencia al viento salino."
+  ],
+  "gallery": [
+    {
+      "src": "../../assets/temp/hendrie-park-reflecting-pools-may-2018-3.jpg",
+      "alt": "Pabellón y estanque"
+    },
+    {
+      "src": "../../assets/temp/nice-miroir-d-eau.jpg",
+      "alt": "Espejo de agua"
+    },
+    {
+      "src": "../../assets/temp/xeriscape-garden-2016-07-12-854.jpg",
+      "alt": "Muro de agua con escultura"
+    }
+  ],
+  "order": 3
+}

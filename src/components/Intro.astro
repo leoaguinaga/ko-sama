@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import detail from '../assets/temp/cleistocactus-strausii-woolly-torch-huntington-desert-garden.jpg';
+---
+
+<section id="contenido" class="wrap grid-12 py-28 md:py-40">
+  <div class="col-span-12 md:col-span-6 md:col-start-7 md:pt-[10vh]" data-reveal>
+    <p class="text-statement leading-[1.25] md:indent-[3em]">
+      Un jardín en el norte no se decora: se diseña con el sol de la tarde, el agua que de verdad hay y especies que
+      aguanten el verano.
+    </p>
+    <p class="mt-8 max-w-[52ch]">
+      Desde hace más de diez años proyectamos y construimos exteriores para casas, empresas y espacios públicos de
+      Lambayeque: lugares que se usan todos los días y mejoran con el tiempo.
+    </p>
+  </div>
+  <figure class="col-span-12 mt-14 flex flex-row-reverse items-end gap-4 md:col-span-3 md:col-start-1 md:mt-[-6rem] md:block" data-reveal>
+    <div class="media aspect-[4/5] w-[62%] shrink-0 md:w-full md:aspect-square" data-unveil>
+      <Image src={detail} alt="Cactus columnares cubiertos de pelo blanco" widths={[480, 800]} sizes="(min-width: 768px) 22vw, 62vw" class="h-full w-full object-cover" />
+    </div>
+    <figcaption class="mt-5 max-w-[22ch] text-note text-muted">
+      Especies de costa, elegidas por cómo resisten el sol y el viento salino.
+    </figcaption>
+  </figure>
+</section>

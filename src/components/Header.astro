@@ -1,0 +1,45 @@
+---
+interface Props {
+  /** "over" = blanco sobre la foto del hero; "paper" = negro sobre marfil */
+  tone?: 'over' | 'paper';
+  current?: string;
+}
+const { tone = 'paper', current } = Astro.props;
+const links = [
+  { href: '/#proyectos', label: 'Proyectos', id: 'proyectos' },
+  { href: '/#estudio', label: 'Estudio', id: 'estudio' },
+  { href: '/#proceso', label: 'Proceso', id: 'proceso' },
+  { href: '/#contacto', label: 'Contacto', id: 'contacto' },
+];
+const over = tone === 'over';
+---
+
+<header
+  class:list={[
+    'wrap flex items-start justify-between gap-6 pt-6 md:pt-8',
+    over ? 'absolute inset-x-0 top-0 z-20 text-paper' : 'relative text-ink',
+  ]}
+>
+  <a href="/" aria-label="Ko-Sama, inicio" class="block shrink-0">
+    <img
+      src={over ? '/brand/logo-blanco.webp' : '/brand/logo-negro.webp'}
+      alt="Ko-Sama Arquitectos del paisaje"
+      width="2000"
+      height="667"
+      class="h-auto w-[148px] md:w-[188px]"
+    />
+  </a>
+  <nav aria-label="Principal" class="text-note">
+    <ul class="hidden items-center gap-7 md:flex">
+      {
+        links.map((l) => (
+          <li class="flex items-center gap-2">
+            {current === l.id && <span class="dot" aria-hidden="true" />}
+            <a href={l.href} class="link-u" aria-current={current === l.id ? 'page' : undefined}>{l.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href="/#contacto" class="link-u md:hidden">Contacto</a>
+  </nav>
+</header>

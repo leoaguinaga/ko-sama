@@ -1,0 +1,111 @@
+@import "tailwindcss";
+@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/opsz-italic.css";
+
+@theme {
+  --color-bg: #f7f6f3;
+  --color-surface: #e8e7e4;
+  --color-ink: #0a0a0a;
+  --color-muted: #6b6b6b; /* gris medio de marca (#737373) oscurecido para AA sobre marfil */
+  --color-paper: #ffffff;
+  --color-accent: #fe0000;
+
+  --font-serif: "Newsreader Variable", "Newsreader", Georgia, serif;
+  --font-sans: var(--font-serif);
+
+  /* Escala de 5 pasos (docs/01 §4) */
+  --text-display: clamp(2.75rem, 7vw, 7.5rem);
+  --text-title: clamp(1.75rem, 3vw, 2.75rem);
+  --text-statement: clamp(1.375rem, 2.2vw, 2.125rem);
+  --text-body: 1.0625rem;
+  --text-note: 0.875rem;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  :root {
+    --gutter: 5vw;
+    color-scheme: light;
+  }
+  html {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    font-size: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    background: var(--color-bg);
+    font-size: var(--text-body);
+    line-height: 1.55;
+    font-variation-settings: "opsz" 16;
+  }
+  h1, h2, h3 {
+    font-weight: 380;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    font-variation-settings: "opsz" 72;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  img { display: block; max-width: 100%; height: auto; }
+  ::selection { background: var(--color-ink); color: var(--color-paper); }
+  :focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+  a { color: inherit; text-decoration: none; }
+}
+
+@layer components {
+  .wrap { padding-inline: var(--gutter); }
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: clamp(12px, 1.6vw, 28px);
+  }
+
+  /* El único bloque rojo de la página */
+  .btn-dot {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    min-height: 48px; padding: 0 1.5rem;
+    background: var(--color-accent); color: var(--color-paper);
+    font-size: 1.0625rem; letter-spacing: 0.005em;
+    transition: transform 160ms var(--ease-out-soft), background-color 200ms;
+  }
+  .btn-dot:hover { background: #d90000; }
+  .btn-dot:active { transform: scale(0.97); }
+
+  .link-u {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    transition: text-underline-offset 300ms var(--ease-out-soft), text-decoration-color 300ms;
+  }
+  .link-u:hover { text-underline-offset: 0.4em; text-decoration-color: var(--color-accent); }
+
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 999px; background: var(--color-accent); }
+
+  .media { overflow: hidden; background: var(--color-surface); }
+  .media img { width: 100%; height: 100%; object-fit: cover; transition: transform 900ms var(--ease-out-soft); }
+  a:hover .media img { transform: scale(1.03); }
+}
+
+/* Movimiento: entrada escalonada (ver Layout.astro). Sin JS, todo visible. */
+.js [data-reveal] > * {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 700ms var(--ease-out-soft), transform 700ms var(--ease-out-soft);
+}
+.js [data-reveal].in > * { opacity: 1; transform: none; }
+.js [data-reveal].in > *:nth-child(2) { transition-delay: 70ms; }
+.js [data-reveal].in > *:nth-child(3) { transition-delay: 140ms; }
+.js [data-reveal].in > *:nth-child(4) { transition-delay: 210ms; }
+.js [data-reveal].in > *:nth-child(5) { transition-delay: 280ms; }
+.js [data-reveal].in > *:nth-child(n+6) { transition-delay: 350ms; }
+
+.js [data-unveil] { clip-path: inset(100% 0 0 0); transition: clip-path 1000ms var(--ease-out-soft); }
+.js [data-unveil].in { clip-path: inset(0 0 0 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal] > *, .js [data-unveil] { opacity: 1 !important; transform: none !important; clip-path: none !important; transition: none !important; }
+  *, *::before, *::after { animation-duration: 1ms !important; transition-duration: 1ms !important; }
+}
