@@ -1,0 +1,30 @@
+{
+  "name": "Oficinas Agroexport",
+  "type": "Empresa",
+  "location": "Chiclayo",
+  "year": 2021,
+  "areaM2": 950,
+  "scope": "Diseño y construcción",
+  "coords": [
+    -79.84,
+    -6.776
+  ],
+  "cover": "../../assets/temp/oficinas-cover.avif",
+  "coverAlt": "Edificio de oficinas de concreto caravista con parasoles verticales",
+  "summary": "Un edificio administrativo de dos pisos que trabaja con luz natural todo el día.",
+  "body": [
+    "Los parasoles verticales de concreto filtran el sol de la tarde y dejan las plantas libres para que la empresa reorganice sus áreas sin obras nuevas.",
+    "La construcción se hizo junto a la planta en operación, con accesos y horarios de obra coordinados con la empresa."
+  ],
+  "gallery": [
+    {
+      "src": "../../assets/temp/oficinas-cover.avif",
+      "alt": "Fachada con parasoles de concreto"
+    },
+    {
+      "src": "../../assets/temp/oficinas-interior.avif",
+      "alt": "Planta libre de oficinas con luz natural"
+    }
+  ],
+  "order": 4
+}

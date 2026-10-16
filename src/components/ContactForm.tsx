@@ -306,7 +306,7 @@ export default function ContactForm({ endpoint, whatsappHref }: Props) {
                   rows={3}
                   value={contact.message}
                   onChange={(e) => set('message', e.target.value)}
-                  placeholder="Qué te gustaría lograr, especies que te gustan, acceso al terreno…"
+                  placeholder="Qué te gustaría lograr, referencias que te gustan, acceso al terreno…"
                   className={field}
                 />
               </Field>

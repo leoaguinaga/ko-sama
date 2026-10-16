@@ -10,7 +10,7 @@ const types = [...new Set(projects.map((p) => p.data.type))];
 const ratios = ['aspect-[4/5]', 'aspect-[3/2]', 'aspect-square', 'aspect-[3/2]', 'aspect-[4/5]', 'aspect-[16/10]'];
 ---
 
-<Layout title="Proyectos · Ko-Sama" description="Jardines, patios, alamedas y espacios públicos diseñados y construidos por Ko-Sama en Lambayeque.">
+<Layout title="Proyectos · Ko-Sama" description="Casas, espacios de trabajo y espacios públicos diseñados y construidos por Ko-Sama en Lambayeque.">
   <div>
     <Header />
     <main id="contenido" class="wrap pt-24 pb-32 md:pt-36">
@@ -28,7 +28,7 @@ const ratios = ['aspect-[4/5]', 'aspect-[3/2]', 'aspect-square', 'aspect-[3/2]',
             <li class="mb-14 break-inside-avoid" data-type={p.data.type} data-reveal>
               <a href={`/proyectos/${p.id}`} class="group block">
                 <div class:list={['media', ratios[i % ratios.length]]}>
-                  <Image src={p.data.cover} alt={p.data.coverAlt} widths={[600, 900, 1300]} sizes="(min-width: 1024px) 31vw, (min-width: 768px) 46vw, 90vw" class="h-full w-full object-cover" transition:name={`cover-${p.id}`} />
+                  <Image format="avif" src={p.data.cover} alt={p.data.coverAlt} widths={[600, 900, 1300]} sizes="(min-width: 1024px) 31vw, (min-width: 768px) 46vw, 90vw" class="h-full w-full object-cover" transition:name={`cover-${p.id}`} />
                 </div>
                 <p class="mt-4 flex items-center gap-2 text-[19px]">
                   <span class="dot scale-50 opacity-0 transition duration-300 group-hover:scale-100 group-hover:opacity-100" aria-hidden="true" />

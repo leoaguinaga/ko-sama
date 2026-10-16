@@ -3,50 +3,42 @@
   "type": "Residencial",
   "location": "Pimentel, Chiclayo",
   "year": 2024,
-  "areaM2": 850,
-  "scope": "Diseño y ejecución",
+  "areaM2": 320,
+  "scope": "Diseño y construcción",
   "featured": true,
   "coords": [
     -79.934,
     -6.836
   ],
-  "cover": "../../assets/temp/the-blue-house-4.jpg",
-  "coverAlt": "Patio con palmeras, cactus y un muro azul al fondo",
-  "summary": "Un patio seco que da sombra todo el año y se riega una vez por semana.",
+  "cover": "../../assets/temp/hero-casa.avif",
+  "coverAlt": "Casa de dos pisos de concreto caravista y celosías de madera frente al mar",
+  "summary": "Una casa de playa de concreto y madera que se abre al mar y se cierra al sol de la tarde.",
   "body": [
-    "La familia quería un jardín que no dependiera del riego diario. Reemplazamos el césped por un patio de grava y especies nativas de costa, con palmeras que dan sombra a la terraza desde las tres de la tarde.",
-    "El muro de fondo se pintó para que el verde lea más intenso en la luz dura del norte. El consumo de agua bajó a la cuarta parte."
+    "La familia quería una casa para todo el año, no solo para el verano. Proyectamos dos volúmenes de concreto caravista: abajo, una planta libre que se abre al mar; arriba, los dormitorios protegidos por celosías de madera.",
+    "Construimos con nuestro equipo en once meses, desde la cimentación hasta los acabados. Los aleros y las celosías bajan la temperatura interior sin depender del aire acondicionado."
   ],
   "gallery": [
     {
-      "src": "../../assets/temp/the-blue-house-4.jpg",
-      "alt": "Patio con palmeras y muro azul"
+      "src": "../../assets/temp/hero-casa.avif",
+      "alt": "Fachada de la casa con celosías de madera"
     },
     {
-      "src": "../../assets/temp/cleistocactus-strausii-woolly-torch-huntington-desert-garden.jpg",
-      "alt": "Detalle de cactus columnares"
+      "src": "../../assets/temp/casa-interior.avif",
+      "alt": "Sala de doble altura con muros de concreto y ventanal al mar"
     },
     {
-      "src": "../../assets/temp/golden-barrels-senecio-mandraliscae-blue-stick-succulents.jpg",
-      "alt": "Cactus de barril con suculentas azules"
+      "src": "../../assets/temp/casa-patio.avif",
+      "alt": "Patio interior con escalera de concreto en voladizo"
     },
     {
-      "src": "../../assets/temp/stenocereus-creeping-devils-at-huntington-library.jpg",
-      "alt": "Cactus rastreros sobre grava"
-    },
-    {
-      "src": "../../assets/temp/xeriscape-garden-2014-2.jpg",
-      "alt": "Jardín seco con flores amarillas"
-    },
-    {
-      "src": "../../assets/temp/rock-garden-6172688208.jpg",
-      "alt": "Patio de grava con árbol joven"
+      "src": "../../assets/temp/obra-estructura.avif",
+      "alt": "La estructura de concreto durante la obra"
     }
   ],
   "beforeAfter": {
-    "before": "../../assets/temp/xeriscape-garden-2014-2.jpg",
-    "after": "../../assets/temp/xeriscape-garden-2014-2.jpg",
-    "alt": "El mismo patio antes y después de la obra",
+    "before": "../../assets/temp/obra-estructura.avif",
+    "after": "../../assets/temp/hero-casa.avif",
+    "alt": "La casa en obra gris y terminada",
     "demo": true
   },
   "order": 1

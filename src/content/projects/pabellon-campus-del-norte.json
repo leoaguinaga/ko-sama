@@ -1,0 +1,30 @@
+{
+  "name": "Pabellón Campus del Norte",
+  "type": "Espacio público",
+  "location": "Chiclayo",
+  "year": 2019,
+  "areaM2": 2600,
+  "scope": "Diseño y construcción",
+  "coords": [
+    -79.86,
+    -6.758
+  ],
+  "cover": "../../assets/temp/campus-cover.avif",
+  "coverAlt": "Pabellón de aulas de tres pisos con galerías abiertas de concreto",
+  "summary": "Un pabellón de aulas con galerías abiertas que se ventilan solas.",
+  "body": [
+    "Tres pisos de aulas conectadas por galerías exteriores: la circulación queda en sombra y cada aula recibe ventilación cruzada.",
+    "Las celosías de ladrillo se fabricaron en obra con mano de obra local."
+  ],
+  "gallery": [
+    {
+      "src": "../../assets/temp/campus-cover.avif",
+      "alt": "Pabellón de aulas y patio"
+    },
+    {
+      "src": "../../assets/temp/campus-galeria.avif",
+      "alt": "Galería de circulación con celosía de ladrillo"
+    }
+  ],
+  "order": 6
+}

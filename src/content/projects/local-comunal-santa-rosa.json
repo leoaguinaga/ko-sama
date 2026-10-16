@@ -1,0 +1,31 @@
+{
+  "name": "Local comunal Santa Rosa",
+  "type": "Espacio público",
+  "location": "Lambayeque",
+  "year": 2022,
+  "areaM2": 680,
+  "client": "Municipalidad (muestra)",
+  "scope": "Diseño",
+  "coords": [
+    -79.906,
+    -6.701
+  ],
+  "cover": "../../assets/temp/comunal-cover.avif",
+  "coverAlt": "Local comunal de ladrillo con un gran techo en voladizo sobre una explanada",
+  "summary": "Un salón de usos múltiples y una plaza techada para el pueblo.",
+  "body": [
+    "Un gran techo plano protege del sol la explanada de ingreso, que funciona como plaza cuando no hay actividades en el salón.",
+    "Entregamos el expediente técnico completo; la obra la ejecutó la municipalidad con nuestra supervisión."
+  ],
+  "gallery": [
+    {
+      "src": "../../assets/temp/comunal-cover.avif",
+      "alt": "Local comunal y explanada techada"
+    },
+    {
+      "src": "../../assets/temp/comunal-interior.avif",
+      "alt": "Salón de usos múltiples con muros de ladrillo caravista"
+    }
+  ],
+  "order": 2
+}

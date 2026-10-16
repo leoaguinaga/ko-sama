@@ -10,15 +10,15 @@ interface Props {
 }
 
 const {
-  title = 'Ko-Sama · Jorge Guerrero, arquitecto del paisaje en Chiclayo',
-  description = 'El estudio del arquitecto Jorge Guerrero: diseño y construcción de jardines, áreas verdes y espacios exteriores en Chiclayo y el norte del Perú desde 2014.',
+  title = 'Ko-Sama · Jorge Guerrero, estudio de arquitectura en Chiclayo',
+  description = 'El estudio del arquitecto Jorge Guerrero: arquitectura, diseño y construcción en Chiclayo y el norte del Perú desde 2014.',
   image = '/brand/og.jpg',
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'LandscapeArchitect',
+  '@type': 'ProfessionalService',
   name: site.name,
   description,
   url: Astro.site?.toString(),

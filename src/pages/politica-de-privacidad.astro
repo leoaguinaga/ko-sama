@@ -11,7 +11,7 @@ const updated = new Date(`${legal.privacyUpdated}T12:00:00`).toLocaleDateString(
   month: 'long',
   year: 'numeric',
 });
-const holder = legal.businessName ?? `${site.name} Arquitectos del Paisaje`;
+const holder = legal.businessName ?? `${site.name} Arquitectos`;
 const holderDetails = [
   legal.ruc && `RUC ${legal.ruc}`,
   legal.fiscalAddress ?? site.address,

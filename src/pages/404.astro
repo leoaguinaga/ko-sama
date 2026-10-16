@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
-import img from "../assets/temp/bloedel-reserve-16.jpg";
+import img from "../assets/temp/escalera-404.avif";
 ---
 
 <Layout title="Página no encontrada · Ko-Sama">
@@ -10,13 +10,13 @@ import img from "../assets/temp/bloedel-reserve-16.jpg";
     <Header />
     <main id="contenido" class="wrap grid-12 items-end gap-y-10 py-24">
       <div class="col-span-12 md:col-span-5">
-        <h1 class="text-display">Este sendero no sigue</h1>
+        <h1 class="text-display">Esta escalera no sigue</h1>
         <a href="/" class="btn-dot mt-10">Volver al inicio</a>
       </div>
       <div class="media col-span-12 aspect-[1/1] md:col-span-6 md:col-start-7">
-        <Image
+        <Image format="avif"
           src={img}
-          alt="Sendero de piedra entre árboles"
+          alt="Escalera de concreto que sube hacia la luz"
           widths={[600, 1100]}
           sizes="40vw"
           class="h-full w-full object-cover"

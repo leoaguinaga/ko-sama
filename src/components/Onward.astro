@@ -2,7 +2,7 @@
 // Cierre de página: lleva a la siguiente parada del recorrido (Nosotros y/o Contacto).
 import { Image } from 'astro:assets';
 import { founder, site, whatsappLink } from '../data/site';
-import studio from '../assets/temp/stenocereus-creeping-devils-at-huntington-library.jpg';
+import studio from '../assets/temp/casa-patio.avif';
 
 interface Props {
   to?: ('nosotros' | 'contacto')[];
@@ -17,7 +17,7 @@ const both = to.includes('nosotros') && to.includes('contacto');
     to.includes('nosotros') && (
       <a href="/nosotros" class="group col-span-12 block md:col-span-6" data-reveal>
         <div class="media aspect-[4/3]" data-unveil>
-          <Image src={studio} alt="Cactus rastreros sobre grava en un jardín seco" widths={[640, 1000, 1400]} sizes="(min-width: 768px) 48vw, 100vw" class="h-full w-full object-cover" />
+          <Image format="avif" src={studio} alt="Patio interior con escalera de concreto en voladizo" widths={[640, 1000, 1400]} sizes="(min-width: 768px) 48vw, 100vw" class="h-full w-full object-cover" />
         </div>
         <p class="mt-6 flex items-center gap-3 text-title">
           {founder.name}

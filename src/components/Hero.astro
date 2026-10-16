@@ -1,17 +1,17 @@
 ---
 import { getImage } from "astro:assets";
 import { founder, site } from "../data/site";
-import mir from "../assets/temp/nice-miroir-d-eau.jpg";
-import hen from "../assets/temp/hendrie-park-reflecting-pools-may-2018-3.jpg";
-import oxf from "../assets/temp/arne-jacobsen-st-catherine-s-college-oxford.jpg";
-import blu from "../assets/temp/the-blue-house-4.jpg";
+import casa from "../assets/temp/hero-casa.avif";
+import obra from "../assets/temp/obra-estructura.avif";
+import oficinas from "../assets/temp/oficinas-cover.avif";
+import hotel from "../assets/temp/hotel-cover.avif";
 
-// ⚠ Fotos temporales: reemplazar por obras propias con cielo/espacio en la mitad superior.
+// ⚠ Imágenes generadas con IA, temporales: reemplazar por obras propias con cielo/espacio en la mitad superior.
 const sources = [
-  { src: mir, alt: "Espejo de agua con palmeras bajo un cielo despejado" },
-  { src: hen, alt: "Pabellón blanco reflejado en un estanque" },
-  { src: oxf, alt: "Explanada de césped frente a un edificio bajo" },
-  { src: blu, alt: "Patio con palmeras y un muro azul" },
+  { src: casa, alt: "Casa de concreto caravista y celosías de madera frente al mar" },
+  { src: obra, alt: "Estructura de concreto de una casa en obra" },
+  { src: oficinas, alt: "Edificio de oficinas con parasoles verticales de concreto" },
+  { src: hotel, alt: "Pabellón de hotel reflejado en una piscina" },
 ];
 const slides = await Promise.all(
   sources.map(async (s) => ({
@@ -19,7 +19,7 @@ const slides = await Promise.all(
     img: await getImage({
       src: s.src,
       widths: [800, 1280, 1920],
-      format: "webp",
+      format: "avif",
       quality: 78,
     }),
   })),
@@ -72,15 +72,15 @@ const slides = await Promise.all(
     data-reveal
   >
     <h1 class="col-span-12 text-display md:col-span-7">
-      Paisajes que<br />se habitan
+      Espacios que<br />se habitan
     </h1>
     <div
       class="col-span-12 mt-6 flex flex-col gap-5 md:col-span-4 md:col-start-9 md:mt-0 md:items-end md:text-right"
     >
       <p class="max-w-[32ch] text-[15px] leading-snug text-paper">
-        El estudio de arquitectura del paisaje de {founder.name}, en {site.city}{" "}
-        desde {site.founded}. Diseñamos y construimos jardines, patios y
-        espacios públicos.
+        El estudio de arquitectura de {founder.name}, en {site.city}{" "}
+        desde {site.founded}. Diseñamos y construimos espacios para casas,
+        empresas y ciudad.
       </p>
       <div class="flex flex-wrap items-center gap-5 md:justify-end">
         <a href="/contacto" class="btn-dot">Agenda una visita</a>

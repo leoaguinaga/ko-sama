@@ -1,7 +1,7 @@
 // ⚠ Datos de muestra: confirmar con el cliente antes del lanzamiento (docs/03, «Lo que necesitamos del cliente»).
 export const site = {
   name: 'Ko-Sama',
-  tagline: 'Arquitectos del paisaje',
+  tagline: 'Arquitectos',
   founded: 2014,
   city: 'Chiclayo',
   phone: '+51 978 100 062',
@@ -31,7 +31,7 @@ export const whatsappLink = (text = 'Hola Ko-Sama, quiero conversar sobre un pro
 export const stats = [
   { label: 'Años de obra', value: '10+' },
   { label: 'Obras entregadas', value: '120' },
-  { label: 'Metros cuadrados diseñados', value: '85 000' },
+  { label: 'Metros cuadrados construidos', value: '85 000' },
   { label: 'Provincias de Lambayeque', value: '3' },
 ];
 
@@ -42,9 +42,9 @@ export const clients = [
 ];
 
 export const process = [
-  { lead: 'Primero, el terreno.', text: 'Visitamos el lugar, medimos, leemos el suelo, el sol de la tarde y el agua que de verdad hay. Sin esto no se dibuja nada.' },
-  { lead: 'Después, el proyecto.', text: 'Anteproyecto con especies, materiales y recorridos; presupuesto por partidas y planos para que sepas qué se construye y cuánto cuesta.' },
-  { lead: 'Al final, la obra.', text: 'Ejecutamos con nuestro equipo, instalamos el riego y te entregamos un plan de mantenimiento para que el jardín mejore con los años.' },
+  { lead: 'Primero, el terreno.', text: 'Visitamos el lugar, medimos, leemos el suelo, el sol de la tarde y lo que ya existe. Sin esto no se dibuja nada.' },
+  { lead: 'Después, el proyecto.', text: 'Anteproyecto con distribución, materiales y recorridos; presupuesto por partidas y planos para que sepas qué se construye y cuánto cuesta.' },
+  { lead: 'Al final, la obra.', text: 'Construimos con nuestro equipo, supervisamos cada partida y te entregamos la obra con sus planos finales y un plan de mantenimiento.' },
 ];
 
 // ⚠ Fundador: el público lo reconoce más por su nombre que por la marca. Falta del cliente:
@@ -58,7 +58,7 @@ export const founder = {
   portrait: null as ImageMetadata | null,
   portraitAlt: 'Retrato de Jorge Guerrero',
   bio: [
-    'Cuando en Chiclayo alguien recomienda a quién encargarle un jardín, casi siempre dice un nombre: el de Jorge.',
-    'Jorge Guerrero es arquitecto y fundó Ko-Sama en 2014. Desde entonces proyecta los jardines, patios y espacios públicos del estudio y acompaña cada obra hasta la entrega: el criterio de la primera visita llega hasta el último riego.',
+    'Cuando en Chiclayo alguien recomienda a quién encargarle un proyecto, casi siempre dice un nombre: el de Jorge.',
+    'Jorge Guerrero es arquitecto y fundó Ko-Sama en 2014. Desde entonces proyecta las casas, espacios de trabajo y espacios públicos del estudio y acompaña cada obra hasta la entrega: el criterio de la primera visita llega hasta el último detalle.',
   ],
 };

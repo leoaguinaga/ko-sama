@@ -1,0 +1,30 @@
+{
+  "name": "Ampliación Santa Victoria",
+  "type": "Residencial",
+  "location": "Santa Victoria, Chiclayo",
+  "year": 2020,
+  "areaM2": 140,
+  "scope": "Diseño y construcción",
+  "coords": [
+    -79.847,
+    -6.785
+  ],
+  "cover": "../../assets/temp/ampliacion-fachada.avif",
+  "coverAlt": "Casa de un piso con una ampliación nueva de concreto y ladrillo en el segundo nivel",
+  "summary": "Un segundo piso sobre una casa existente, sin que la familia tuviera que mudarse.",
+  "body": [
+    "Reforzamos la estructura existente y levantamos un segundo piso de concreto y ladrillo caravista con dos dormitorios y un estudio.",
+    "La obra se programó por etapas para que la familia siguiera viviendo en el primer piso durante toda la construcción."
+  ],
+  "gallery": [
+    {
+      "src": "../../assets/temp/ampliacion-fachada.avif",
+      "alt": "Fachada con el segundo piso nuevo"
+    },
+    {
+      "src": "../../assets/temp/ampliacion-interior.avif",
+      "alt": "Estudio del segundo piso con losa de concreto expuesta"
+    }
+  ],
+  "order": 5
+}

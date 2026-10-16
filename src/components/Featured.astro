@@ -9,7 +9,7 @@ const lifted = 1; // el fotograma «levantado»
 
 const ba = p.data.beforeAfter;
 const toProps = async (src: ImageMetadata) => {
-  const img = await getImage({ src, widths: [800, 1280, 1920], format: 'webp' });
+  const img = await getImage({ src, widths: [800, 1280, 1920], format: 'avif' });
   return { src: img.src, srcSet: img.srcSet.attribute, width: Number(img.attributes.width ?? src.width), height: Number(img.attributes.height ?? src.height) };
 };
 const baProps = ba && { before: await toProps(ba.before), after: await toProps(ba.after), alt: ba.alt, demo: ba.demo };
@@ -36,7 +36,7 @@ const baProps = ba && { before: await toProps(ba.before), after: await toProps(b
           frames.map((f, i) => (
             <li class:list={['shrink-0 snap-start', i === lifted ? 'order-first md:order-none' : '']}>
               <div class:list={['media relative', i === lifted ? 'aspect-[3/4] h-[56vw] md:h-[62vh]' : 'aspect-[4/3] h-[34vw] md:h-[28vh]']}>
-                <Image src={f.src} alt={f.alt} widths={[480, 900, 1400]} sizes={i === lifted ? '50vw' : '25vw'} class="h-full w-full object-cover" />
+                <Image format="avif" src={f.src} alt={f.alt} widths={[480, 900, 1400]} sizes={i === lifted ? '50vw' : '25vw'} class="h-full w-full object-cover" />
                 {i === lifted && <span class="dot absolute top-4 left-4" aria-hidden="true" />}
               </div>
             </li>

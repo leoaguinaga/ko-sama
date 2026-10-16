@@ -1,0 +1,30 @@
+{
+  "name": "Hotel Las Dunas",
+  "type": "Hospedaje",
+  "location": "Reque, Chiclayo",
+  "year": 2023,
+  "areaM2": 1800,
+  "scope": "Diseño y construcción",
+  "coords": [
+    -79.818,
+    -6.866
+  ],
+  "cover": "../../assets/temp/hotel-cover.avif",
+  "coverAlt": "Pabellón de concreto y madera reflejado en una piscina rectangular",
+  "summary": "Un hotel de playa de un solo nivel, con galerías que dan sombra todo el día.",
+  "body": [
+    "El pabellón principal reúne recepción y restaurante bajo una galería profunda; las habitaciones se ordenan en bloques bajos hacia las dunas.",
+    "Construimos en dos etapas para que el hotel abriera la primera mitad de las habitaciones mientras se terminaba la segunda."
+  ],
+  "gallery": [
+    {
+      "src": "../../assets/temp/hotel-cover.avif",
+      "alt": "Pabellón principal y piscina"
+    },
+    {
+      "src": "../../assets/temp/hotel-habitacion.avif",
+      "alt": "Habitación con techo de vigas de madera y terraza"
+    }
+  ],
+  "order": 3
+}

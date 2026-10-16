@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import { stats, site, founder } from "../data/site";
-import team from "../assets/temp/bloedel-reserve-16.jpg";
+import team from "../assets/temp/estudio-equipo.avif";
 
 const projects = await getCollection("projects");
 
@@ -56,7 +56,7 @@ const [cx, cy] = px([-79.84, -6.77]);
       class="col-span-12 mt-6 max-w-[42ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug md:col-span-6"
     >
       {site.name} es el equipo que {founder.firstName} formó para hacer el trabajo
-      completo: proyectar, construir y mantener. El mismo equipo de la primera visita
+      completo: proyectar, construir y acompañar. El mismo equipo de la primera visita
       está en la obra.
     </p>
   </div>
@@ -64,9 +64,9 @@ const [cx, cy] = px([-79.84, -6.77]);
   <div class="mt-16 grid-12 gap-y-4 md:mt-20">
     <div class="relative col-span-12 md:col-span-8" data-reveal>
       <div class="media aspect-[4/3] md:aspect-[16/10]" data-unveil>
-        <Image
+        <Image format="avif"
           src={team}
-          alt="Sendero de piedra entre árboles y macizos de flores"
+          alt="Arquitecto y maestro de obra revisando un plano en obra"
           widths={[800, 1280, 1800]}
           sizes="(min-width: 768px) 64vw, 100vw"
           class="h-full w-full object-cover"
@@ -75,9 +75,9 @@ const [cx, cy] = px([-79.84, -6.77]);
       <p
         class="mt-5 bg-bg md:absolute md:top-0 md:right-0 md:mt-0 md:w-[320px] md:p-5"
       >
-        Trabajamos con especies que conocemos de vivero y de obra, y con riego
-        que se puede mantener. Preferimos un jardín que funcione diez años a uno
-        que luzca una semana.
+        Trabajamos con materiales y sistemas que conocemos de obra, y que se
+        pueden mantener. Preferimos un espacio que funcione diez años a uno que
+        luzca una semana.
       </p>
     </div>
 
