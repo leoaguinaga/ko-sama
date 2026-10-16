@@ -324,6 +324,10 @@ export default function ContactForm({ endpoint, whatsappHref }: Props) {
               </button>
               <p className="text-note text-muted">Te respondemos en menos de 24 horas hábiles.</p>
             </div>
+            <p className="mt-4 max-w-[60ch] text-note text-muted">
+              Al enviar aceptas que usemos estos datos para responderte y coordinar la visita, según nuestra{' '}
+              <a className="link-u" href="/politica-de-privacidad">política de privacidad</a>.
+            </p>
             {status === 'error' && (
               <p role="alert" className="mt-5">
                 No se pudo enviar.{' '}

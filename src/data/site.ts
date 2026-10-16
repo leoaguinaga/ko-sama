@@ -13,6 +13,18 @@ export const site = {
   leadsEndpoint: import.meta.env.PUBLIC_LEADS_ENDPOINT ?? '/api/leads',
 };
 
+// ⚠ Titular del banco de datos para la política de privacidad (Ley 29733). Falta del cliente:
+//   razón social, RUC y domicilio fiscal. Mientras sean null, la página no los muestra.
+//   `retentionMonths`: plazo de conservación de leads que no contratan; borrador a confirmar.
+export const legal = {
+  businessName: null as string | null,
+  ruc: null as string | null,
+  fiscalAddress: null as string | null,
+  privacyEmail: site.email,
+  retentionMonths: 24,
+  privacyUpdated: '2026-10-16',
+};
+
 export const whatsappLink = (text = 'Hola Ko-Sama, quiero conversar sobre un proyecto.') =>
   `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(text)}`;
 

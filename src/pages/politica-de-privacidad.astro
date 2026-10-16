@@ -1,0 +1,220 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { founder, legal, site, whatsappLink } from '../data/site';
+
+// Redactada según la Ley 29733 y su reglamento (D.S. 016-2024-JUS).
+// ⚠ Borrador: revisar con el cliente (y de preferencia con un abogado) antes del lanzamiento.
+const updated = new Date(`${legal.privacyUpdated}T12:00:00`).toLocaleDateString('es-PE', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+const holder = legal.businessName ?? `${site.name} Arquitectos del Paisaje`;
+const holderDetails = [
+  legal.ruc && `RUC ${legal.ruc}`,
+  legal.fiscalAddress ?? site.address,
+].filter(Boolean);
+const years = legal.retentionMonths % 12 === 0 ? legal.retentionMonths / 12 : null;
+const retention = years ? `${years} ${years === 1 ? 'año' : 'años'}` : `${legal.retentionMonths} meses`;
+
+const sections = [
+  { id: 'responsable', title: 'Quién es responsable' },
+  { id: 'datos', title: 'Qué datos recogemos' },
+  { id: 'finalidad', title: 'Para qué los usamos' },
+  { id: 'terceros', title: 'Con quién los compartimos' },
+  { id: 'conservacion', title: 'Cuánto tiempo los guardamos' },
+  { id: 'derechos', title: 'Tus derechos' },
+  { id: 'cookies', title: 'Cookies y almacenamiento' },
+  { id: 'cambios', title: 'Cambios a esta política' },
+];
+---
+
+<Layout
+  title="Política de privacidad · Ko-Sama"
+  description="Cómo Ko-Sama trata los datos que nos dejas en el formulario de contacto: qué recogemos, para qué, con quién los compartimos y cómo ejercer tus derechos."
+>
+  <div>
+    <Header />
+    <main id="contenido" class="wrap pt-20 pb-28 md:pt-32 md:pb-40">
+      <div class="grid-12 gap-y-6">
+        <h1 class="col-span-12 text-display md:col-span-9">Política de privacidad</h1>
+        <p class="col-span-12 max-w-[34ch] text-[clamp(1.125rem,1.5vw,1.375rem)] leading-snug md:col-span-3 md:self-end md:text-right">
+          Actualizada el {updated}.
+        </p>
+      </div>
+
+      <div class="mt-14 grid-12 gap-y-12 md:mt-24">
+        <nav aria-label="En esta página" class="col-span-12 md:col-span-3">
+          <ol class="space-y-1 text-note md:sticky md:top-[calc(var(--header-h)+2rem)]">
+            {
+              sections.map((s, i) => (
+                <li> <a class="link-u" href={`#${s.id}`}>
+                    <span class="text-muted tabular-nums">{String(i + 1).padStart(2, '0')}</span> {s.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
+        </nav>
+
+        <div class="legal col-span-12 md:col-span-7 md:col-start-5">
+          <p class="text-statement leading-[1.25]">
+            Solo pedimos lo necesario para responderte y visitar tu terreno. No vendemos tus datos ni los usamos para
+            publicidad.
+          </p>
+
+          <section id="responsable" aria-labelledby="responsable-t">
+            <h2 id="responsable-t">1. Quién es responsable</h2>
+            <p>
+              El titular del banco de datos es <b>{holder}</b>, estudio dirigido por el Arq. {founder.name}{
+                holderDetails.length > 0 && <>, con domicilio en {holderDetails.join(', ')}</>
+              }. Para cualquier asunto sobre tus datos escríbenos a <a class="link-u" href={`mailto:${legal.privacyEmail}`}>{legal.privacyEmail}</a>.
+            </p>
+            <p>
+              Tratamos tus datos conforme a la Ley N.° 29733, Ley de Protección de Datos Personales, y su reglamento.
+            </p>
+          </section>
+
+          <section id="datos" aria-labelledby="datos-t">
+            <h2 id="datos-t">2. Qué datos recogemos</h2>
+            <p>Cuando llenas el formulario de contacto nos das:</p>
+            <ul>
+              <li>Tu nombre y un teléfono o WhatsApp; el correo es opcional.</li>
+              <li>Cómo prefieres que te contactemos.</li>
+              <li>
+                Lo que nos cuentas de tu proyecto: el servicio que buscas, el tipo de lugar, el área, cómo está el
+                terreno, cuándo quieres empezar, el presupuesto aproximado, la ubicación y tu mensaje.
+              </li>
+              <li>
+                Si llegaste desde un anuncio o enlace con etiquetas de campaña, el nombre de esa campaña. No guardamos tu
+                dirección IP ni te identificamos a través de ella.
+              </li>
+            </ul>
+            <p>
+              No te pedimos datos sensibles. Te pedimos que no los incluyas en el mensaje.
+            </p>
+            <p>
+              Si nos escribes por WhatsApp, Instagram o correo, recibimos lo que tú nos envíes por ese canal. Esas
+              plataformas tienen sus propias políticas de privacidad.
+            </p>
+          </section>
+
+          <section id="finalidad" aria-labelledby="finalidad-t">
+            <h2 id="finalidad-t">3. Para qué los usamos</h2>
+            <ul>
+              <li>Responder tu consulta y coordinar la visita a tu terreno.</li>
+              <li>Preparar el anteproyecto y el presupuesto que nos pidas.</li>
+              <li>Si nos contratas, gestionar la obra, la facturación y el mantenimiento.</li>
+            </ul>
+            <p>
+              Los usamos porque tú nos los das al enviar el formulario o al escribirnos, y solo para estos fines. No te
+              enviaremos publicidad ni boletines. Puedes retirar tu consentimiento cuando quieras escribiéndonos; eso no
+              afecta lo que ya hicimos con él.
+            </p>
+            <p>El estudio no se dirige a menores de edad. Si eres menor, pide a tus padres que nos contacten.</p>
+          </section>
+
+          <section id="terceros" aria-labelledby="terceros-t">
+            <h2 id="terceros-t">4. Con quién los compartimos</h2>
+            <p>
+              Tus datos los ve el equipo del estudio. Para que el sitio funcione nos apoyamos en dos proveedores que los
+              procesan por encargo nuestro y no pueden usarlos para nada más:
+            </p>
+            <ul>
+              <li><b>Vercel</b>, que aloja este sitio web.</li>
+              <li><b>Resend</b>, que nos hace llegar por correo lo que envías en el formulario.</li>
+            </ul>
+            <p>
+              Ambos tienen servidores en Estados Unidos, por lo que tus datos se transfieren fuera del Perú con las
+              garantías que exige la ley. No compartimos tus datos con nadie más, salvo que una autoridad competente lo
+              ordene.
+            </p>
+          </section>
+
+          <section id="conservacion" aria-labelledby="conservacion-t">
+            <h2 id="conservacion-t">5. Cuánto tiempo los guardamos</h2>
+            <p>
+              Si no llegamos a trabajar juntos, borramos tus datos a los {retention} de tu último contacto con nosotros.
+              Si nos contratas, los conservamos mientras dure la relación y después el tiempo que exigen las normas
+              tributarias y contables.
+            </p>
+          </section>
+
+          <section id="derechos" aria-labelledby="derechos-t">
+            <h2 id="derechos-t">6. Tus derechos</h2>
+            <p>
+              Puedes pedirnos en cualquier momento <b>acceder</b> a tus datos, <b>corregirlos</b>, <b>eliminarlos</b>, <b>oponerte</b> a que los usemos o recibir una copia. Escríbenos a <a class="link-u" href={`mailto:${legal.privacyEmail}?subject=Mis%20datos%20personales`}>{legal.privacyEmail}</a> con tu nombre, el teléfono o correo con el que nos contactaste y lo que necesitas. También puedes hacerlo
+              por <a class="link-u" href={whatsappLink('Hola Ko-Sama, quiero ejercer mis derechos sobre mis datos personales.')}>WhatsApp</a>.
+            </p>
+            <p>
+              Te respondemos dentro de los plazos que fija el reglamento de la ley. Si consideras que no atendimos bien tu
+              pedido, puedes acudir a la Autoridad Nacional de Protección de Datos Personales del Ministerio de Justicia y
+              Derechos Humanos.
+            </p>
+          </section>
+
+          <section id="cookies" aria-labelledby="cookies-t">
+            <h2 id="cookies-t">7. Cookies y almacenamiento</h2>
+            <p>
+              Este sitio no usa cookies de publicidad ni de seguimiento. Mientras llenas el formulario, tu navegador guarda
+              un borrador de tus respuestas para que no las pierdas si cambias de página. Ese borrador se queda en tu
+              dispositivo, se borra al enviar el formulario y desaparece al cerrar la pestaña.
+            </p>
+          </section>
+
+          <section id="cambios" aria-labelledby="cambios-t">
+            <h2 id="cambios-t">8. Cambios a esta política</h2>
+            <p>
+              Si cambiamos la forma en que tratamos tus datos, actualizaremos esta página y la fecha de arriba. Si el
+              cambio es importante y tenemos tu contacto, te avisaremos.
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+  <Footer />
+</Layout>
+
+<style>
+  .legal section {
+    margin-top: 4rem;
+    scroll-margin-top: calc(var(--header-h) + 2rem);
+  }
+  .legal h2 {
+    font-size: var(--text-title);
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+  .legal p,
+  .legal ul {
+    max-width: 62ch;
+  }
+  .legal p + p,
+  .legal p + ul,
+  .legal ul + p {
+    margin-top: 1rem;
+  }
+  .legal ul {
+    list-style: none;
+    padding: 0;
+  }
+  .legal li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+  .legal li + li {
+    margin-top: 0.5rem;
+  }
+  .legal li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.375rem;
+    height: 1px;
+    background: var(--color-muted);
+  }
+</style>
