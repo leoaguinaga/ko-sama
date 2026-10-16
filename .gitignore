@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # vercel build output (generated on deploy)
 .vercel/
+
+# astro cache: only the optimized images are versioned (see cacheDir)
+.astro-cache/*
+!.astro-cache/assets/
